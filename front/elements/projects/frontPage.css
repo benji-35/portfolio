@@ -1,0 +1,63 @@
+.portfolio-projects-content {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    margin-top: auto;
+    text-align: center;
+    font-family: arial;
+    margin-top: 15px;
+}
+
+.descript-portfolioProject {
+    height: 150px;
+    overflow: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.redirectProject-portfolio {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-bottom-portfolioProject {
+    position: relative;
+    bottom: 0;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card a {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+}
+
+.card a:hover {
+  cursor: pointer;
+  background-color: rgb(73, 73, 73);
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
