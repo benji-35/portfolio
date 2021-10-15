@@ -37,7 +37,7 @@
             </select>
             <input type="submit" hidden>
         </form>
-        <a class="btnNavMenu-front" href="<?=$hlp->getMainUrl()?>"><?=$ext->getLangaugeValue($extName, "PresButton")?></a>
+        <a class="btnNavMenu-front" href="<?=$hlp->getMainUrl() . "/presentation"?>"><?=$ext->getLangaugeValue($extName, "PresButton")?></a>
         <a class="btnNavMenu-front" href="<?=$hlp->getMainUrl() . "/projects"?>"><?=$ext->getLangaugeValue($extName, "ProjectButton")?></a>
         <a class="btnNavMenu-front" href="<?=$hlp->getMainUrl() . "/contactMe"?>"><?=$ext->getLangaugeValue($extName, "ContactBtn")?></a>
     </div>
