@@ -158,7 +158,7 @@ class Router {
         ),
     );
 
-    private static $mainUrl = "http://localhost/websiteCopy";
+    private static $mainUrl = "http://localhost/portfolio";
 
     public static function getMainUrl():string {
         return self::$mainUrl;
