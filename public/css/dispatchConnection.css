@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
+body {
+    font-family: 'Didact Gothic', sans-serif;
+    color:#333;
+    box-sizing: border-box;
+    background-color: rgb(41, 41, 41);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(112, 112, 112);
+  -webkit-box-shadow: 0 0 0px 1000px #1f1f1f inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.mainContent {
+    position: absolute;
+    width: 100%;
+    display: inline-flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+}
+
+.formConnect {
+    width: 400px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #1f1f1f;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(112, 112, 112);
+}
+
+.formConnect input {
+    width: 80%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: rgb(112, 112, 112);
+}
+
+.formConnect button {
+    color: rgb(112, 112, 112);
+}
+
+#createAccount {
+    display: none;
+}
+
+.optionalBtns {
+    background-color: transparent;
+    border: none;
+    transition: 0.2s;
+}
+
+.optionalBtns:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btnCloseError {
+    background-color: transparent;
+    border: 1px solid black;
+    font-weight: bold;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+.btnCloseError:hover {
+    cursor: pointer;
+}
+
+.errorPopup {
+    width: 80%;
+    border: 1px solid red;
+    background-color: pink;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.logoDispatch {
+    width: 40%;
+}

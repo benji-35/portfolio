@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
+body {
+    font-family: 'Didact Gothic', sans-serif;
+    color:#333;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+   
+    background-color: #f2f2f2;
+    height: 110px;
+    padding: 10px 0;
+    z-index: 2;
+    position: relative;
+}
+
+header nav {
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 110px;
+}
+
+.logo {
+    width: auto;
+}
+
+.logo img {
+    height: 115px;
+}
+
+.lang-menu {
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    margin-top: 25px;
+    position: relative;
+    transform: translateY(25%);
+    text-align: left;
+}
+.lang-menu .selected-lang {
+    display: flex;   
+    justify-content: space-between;
+    line-height: 1;
+    cursor: pointer;
+}
+.lang-menu .selected-lang:before {
+    content: '';
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.lang-menu ul {
+    margin: 0;
+    padding: 0;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #f8f8f8;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    width: 125px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+}
+
+
+.lang-menu ul li {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lang-menu ul li a, .lang-menu ul li button {
+    text-decoration: none;
+    width: 125px;
+    padding: 5px 10px;
+    display: block;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    height: 30px;
+}
+
+.lang-menu ul li:hover {
+    background-color: #f2f2f2;
+}
+
+.lang-menu ul li a:before, .lang-menu ul li button:before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.de:before {
+    background-image: url(https://www.worldometers.info/img/flags/gm-flag.gif);
+    width: 32px;
+}
+
+.en:before {
+    background-image: url(https://www.worldometers.info/img/flags/us-flag.gif);
+    width: 32px;
+}
+.fr:before {
+    background-image: url(https://www.worldometers.info/img/flags/fr-flag.gif);
+    width: 32px;
+}
+
+.ar:before {
+    background-image: url(https://www.worldometers.info/img/flags/sa-flag.gif);
+    width: 32px;
+}
+
+
+.lang-menu:hover ul, .lang-menu ul:hover .lang-menu ul{
+    display: block;
+}
+
+.mainContent {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.alignDivs {
+    width: 100%;
+    display: inline-flex;
+}
+
+.leftMainContent {
+    width: 50%;
+    height: auto;
+    font-size: 45px;
+    left: 0;
+}
+
+.rightMainContent {
+    width: 50%;
+    height: auto;
+    left: 50%;
+}
+
+.totalyMainContent {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.historyDiv {
+    position: relative;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.titleHeader {
+    position: absolute;
+    left: 50%;
+    top: 43px;
+    transform: translateX(-50%);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.hideLink {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-120px, -50%);
+}
+
+.hideLink a i {
+    color: transparent;
+}
+
+.hideLink a:hover i {
+    color: black;
+}
+
+.headerHistoryDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: center;
+    width: 100%;
+    border: 1px solid black;
+    border-style: none none solid none;
+}
+
+
+.headerExpDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: center;
+    width: 100%;
+}
+
+.headerHistoryDiv select {
+    height: max-content;
+}
+
+.experienceDiv {
+    width: 100%;
+    border: 1px solid black;
+    border-style: none none solid none;
+    position: relative;
+}
+
+.experienceDiv h3, .experienceDiv h5 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.leftContent {
+    position: absolute;
+    width: 50%;
+    left: 0;
+}
+
+.rightContent {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+}
+
+.navBarWindows {
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+.navBarWindows div {
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navBarWindows div a {
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 33%;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.navBarWindows div a:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}

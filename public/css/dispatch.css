@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-family: 'Didact Gothic', sans-serif;
+    color:#333;
+    box-sizing: border-box;
+    background-color: rgb(41, 41, 41);
+}
+
+.header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(58, 58, 58);
+}
+
+.headerImg {
+    height: 50px;
+}
+
+.btnNavMenu {
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btnNavMenu i {
+    color: white;
+}
+
+.btnNavMenu:hover {
+    cursor: pointer;
+}
+
+.mainContent {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 90%;
+}
+
+#navMar {
+    width: 15%;
+    height: 100%;
+    font-size: 45px;
+    left: 0;
+    background-color: rgb(58, 58, 58);
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: medium;
+    color: rgb(141, 141, 141);
+}
+
+#boxContent {
+    width: 85%;
+    height: 100%;
+    left: 15%;
+    background-color: rgb(41, 41, 41);
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+#navMar .title {
+    font-size: x-large;
+}
+
+.btnConnectServer {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(58, 58, 58);
+    border: none;
+    color: rgb(141, 141, 141);
+    text-align: left;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+}
+
+.btnConnectServer:hover {
+    cursor: pointer;
+    background-color: rgb(41, 41, 41);
+}
+
+.imgConnectServer {
+    height: 35px;
+    margin-right: 10px;
+}
+
+#createServer {
+    text-align: center;
+    color: rgb(141, 141, 141);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: fit-content;
+    padding-right: 2px;
+    padding-left: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+#joinServer {
+    text-align: center;
+    color: rgb(141, 141, 141);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: fit-content;
+    padding-right: 2px;
+    padding-left: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+#chooseTeam {
+    text-align: center;
+    color: rgb(141, 141, 141);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 80%;
+    padding-right: 2px;
+    padding-left: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.formChooseTeams {
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.formCreateSerever {
+    border: 3px solid black;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.formCreateSerever label {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.formCreateSerever input[type="text"], .formCreateSerever input[type="Password"] {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.formCreateSerever button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.teamSettingAdd {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    padding-bottom: 15px;
+    left: 15%;
+    position: relative;
+}
+
+.toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.toggle input {
+    margin-right: 10px;
+    height: 15px;
+    width: 15px;
+}
+
+.toggle label {
+    font-size: 15px;
+    width: max-content;
+}
+
+.teamSettingAddGlobal input[type="text"] {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width: 50%;
+}
+
+.alignMainSettingsteamAdd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.disconnectButton {
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+    color: rgb(173, 18, 18);
+    width: 100%;
+    height: 50px;
+}
+
+.disconnectButton:hover, .shareButton:hover {
+    background-color: rgb(41, 41, 41);
+    cursor: pointer;
+}
+
+.shareButton {
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+    color: rgb(49, 173, 18);
+    width: 100%;
+    height: 50px;
+}
+
+.divChooseTeam {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%;
+    border: 3px solid #5b5b5b;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btnChooseTeam {
+    min-height: 40px;
+    width: 100px;
+    border: none;
+    background-color: #000;
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
+.btnChooseTeam:hover {
+    cursor: pointer;
+    background-color: rgb(112, 112, 112);
+}
+
+.inputsChooseTeam {
+    text-align: right;
+    display: flex;
+    width: min-content;
+}
+
+.errorCallSign {
+    border: 1px solid red;
+    background-color: hsla(350, 100%, 88%, 0.534);
+    color: black;
+    width: max-content;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.errorCallSign p {
+    padding: 0;
+    margin: 0;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.btnEditionTeamChoose {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btnEditionTeamChoose:hover {
+    cursor: pointer;
+}
+
+.errorValidPwd {
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+    border: 1px solid red;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.alignDivChooseAdd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alignDivChooseAdd input {
+    margin-left: 10px;
+    margin-right: 10px;
+}

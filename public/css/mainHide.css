@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
+body {
+    font-family: 'Didact Gothic', sans-serif;
+    color:rgb(150, 150, 150);
+    box-sizing: border-box;
+    z-index: 1;
+    background-color: rgb(82, 82, 82);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+header {
+    color:rgb(150, 150, 150);
+    background-color: #333;
+    height: 110px;
+    padding: 10px 0;
+    z-index: 2;
+    position: relative;
+}
+
+header nav {
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 110px;
+    background-color: #333;
+}
+
+.logo {
+    width: auto;
+}
+
+.logo img {
+    height: 115px;
+}
+
+.lang-menu {
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    margin-top: 25px;
+    position: relative;
+    transform: translateY(25%);
+    text-align: left;
+}
+.lang-menu .selected-lang {
+    display: flex;   
+    justify-content: space-between;
+    line-height: 1;
+    cursor: pointer;
+}
+.lang-menu .selected-lang:before {
+    content: '';
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.lang-menu ul {
+    margin: 0;
+    padding: 0;
+    display: none;
+    background-color: #333;
+    border: 1px solid rgb(39, 39, 39);
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    width: 125px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    color:rgb(150, 150, 150);
+}
+
+
+.lang-menu ul li {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lang-menu ul li a, .lang-menu ul li button {
+    text-decoration: none;
+    width: 125px;
+    padding: 5px 10px;
+    display: block;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    height: 30px;
+    color:rgb(150, 150, 150);
+}
+
+.lang-menu ul li:hover {
+    background-color: rgb(85, 85, 85);
+}
+
+.lang-menu ul li a:before, .lang-menu ul li button:before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.de:before {
+    background-image: url(https://www.worldometers.info/img/flags/gm-flag.gif);
+    width: 32px;
+}
+
+.en:before {
+    background-image: url(https://www.worldometers.info/img/flags/us-flag.gif);
+    width: 32px;
+}
+.fr:before {
+    background-image: url(https://www.worldometers.info/img/flags/fr-flag.gif);
+    width: 32px;
+}
+
+.ar:before {
+    background-image: url(https://www.worldometers.info/img/flags/sa-flag.gif);
+    width: 32px;
+}
+
+
+.lang-menu:hover ul, .lang-menu ul:hover .lang-menu ul{
+    display: block;
+}
+
+.mainContent {
+    position: relative;
+    width: 100%;
+    display: inline-flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.leftMainContent {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    font-size: 45px;
+    left: 0;
+}
+
+.rightMainContent {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    left: 50%;
+}
+
+.titleHeader {
+    position: absolute;
+    left: 50%;
+    top: 43px;
+    transform: translateX(-50%);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#popupSure {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+    background-color: #333;
+    border-radius: 5px;
+    display: block;
+}
+
+#popupSure a{
+    color:rgb(150, 150, 150);
+    text-decoration: underline;
+}
+
+#popupSure button {
+    color:rgb(150, 150, 150);
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    display: flex;
+}
+
+#popupSure button p {
+    background-color: rgb(39, 39, 39);
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.hideLink {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-120px, -50%);
+}
+
+.hideLink a i {
+    color:rgb(150, 150, 150);
+}

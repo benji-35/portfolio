@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(41, 41, 41);
+}
+
+.mainContent {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: inline-flex;
+    align-items: stretch;
+}
+
+header {
+    display: inline-flex;
+    width: 96%;
+    height: 56px;
+    justify-content: space-between;
+    background-color: rgb(41, 41, 41);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.catHeader {
+    display: inline-flex;
+    align-items: center;
+}
+
+.websiteLogo img {
+    height: 35px;
+}
+
+.navMenu {
+    position: relative;
+    left: 0;
+    width: 240px;
+    background-color: rgb(41, 41, 41);
+    overflow-x: unset;
+    overflow-y: scroll;
+}
+
+
+.mainPage {
+    background-color: red;
+    position: relative;
+    width: 100%;
+}
+
+.navMenu button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    font-size: smaller;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navMenu button:hover {
+    cursor: pointer;
+    background-color: rgb(95, 95, 95);
+}
+
+.searchBar {
+    width: 559.2px;
+    height: 34.4px;
+    text-align: left;
+    padding: 0.8px;
+    color: rgb(112, 112, 112);
+    border: 1px solid rgb(112, 112, 112);
+    background-color: rgb(34, 34, 34);
+    align-items: center;
+    display: flex;
+}
+
+.btnLoop div{
+    width: 54.4px;
+    height: 34.4px;
+    border: 1px solid rgb(112, 112, 112);
+    border-radius: 0;
+    background-color: rgb(112, 112, 112);
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0.8px;
+}
+
+.btnLoop {
+    border: none;
+    border-radius: 0;
+    background-color: rgb(112, 112, 112);
+    margin: 0;
+    padding: 0;
+}
+
+.btnLoop:hover {
+    cursor: pointer;
+}
+
+.searchBar p {
+    padding-left: 10px;
+}
+
+.searchBar:hover {
+    cursor: text;
+}
+
+.websiteLogo {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+}
+
+.websiteLogo p {
+    font-weight: bold;
+}
+
+.websiteLogo p sup {
+    font-weight: normal;
+}
+
+.btnNavToggle {
+    border-radius: 0;
+    border: none;
+    color: white;
+    background-color: transparent;
+}
+
+.btnNavToggle:hover {
+    cursor: pointer;
+}
+
+.blockNav {
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.separateLine {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(112, 112, 112);
+}
+
+.blockNav p {
+    font-size: large;
+    color: rgb(138, 138, 138);
+}
+
+.moreLinks {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: smaller;
+    color: rgb(138, 138, 138);
+}
+
+.moreLinks a, #copyright div {
+    text-decoration: none;
+    color: rgb(138, 138, 138);
+}
+
+.voiceSearch {
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    color: white;
+    background-color: rgb(34, 34, 34);
+}
+
+.btnHeaderAccount {
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+    background-color: transparent;
+}
+
+.accountImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
