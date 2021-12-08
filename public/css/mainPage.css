@@ -312,7 +312,7 @@ header nav {
 
 .competencetableName {
     width: 20%;
-    text-align: center;
+    text-align: left;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -337,6 +337,13 @@ header nav {
 
 .start-comp {
     background-color: rgb(55, 204, 75);
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.start-nocomp {
+    background-color: rgb(56, 56, 138);
     border: none;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;

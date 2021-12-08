@@ -254,4 +254,20 @@ class Helpers {
         $db->disconnect();
         return $res;
     }
+
+    public static function getMyCompetences():array {
+        global $db;
+        $res = array();
+        $connect = $db->connect();
+        if ($connect == null) {
+            return $res;
+        }
+        $stm = $connect->prepare("SELECT * FROM mcomp WHERE 1 ORDER BY percent DESC");
+        $stm->execute();
+        while ($resStm = $stm->fetch()) {
+            array_push($res, $resStm);
+        }
+        $db->disconnect();
+        return $res;
+    }
 }

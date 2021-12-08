@@ -17,6 +17,7 @@
     }
     $projects = $hlp->getMyProjects();
     $experiences = $hlp->getMyExperiences();
+    $competences = $hlp->getMyCompetences();
 ?>
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
@@ -201,126 +202,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="competencetableName">PHP (80%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">CSS (60%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">HTML (70%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">C (90%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">C# - Unity 3D (90%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">Python (40%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">Java (50%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="competencetableName">Javascript (20%)</td>
-                                <td class="competencetablePercent">
-                                    <span class="spanComp start-comp"></span>
-                                    <span class="spanComp middle-comp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp middle-nocomp"></span>
-                                    <span class="spanComp end-nocomp"></span>
-                                </td>
-                            </tr>
+                            <?php
+                                foreach ($competences as $competence) {
+                                    $spansComp = "";
+                                    $tmpPercent = $competence['percent'];
+                                    for ($i = 0; $i < 10; $i++) {
+                                        $prefix = "middle";
+                                        if ($i == 0) {
+                                            $prefix = "start";
+                                        } else if ($i == 9) {
+                                            $prefix = "end";
+                                        }
+                                        if ($tmpPercent <= 0) {
+                                            $spansComp .= "<span class=\"spanComp $prefix-nocomp\"></span>";
+                                        } else {
+                                            $spansComp .= "<span class=\"spanComp $prefix-comp\"></span>";
+                                        }
+                                        $tmpPercent -= 10;
+                                    }
+                            ?>
+                                <tr>
+                                    <td class="competencetableName"><?=$competence['name'] . " (" . $competence['percent'] . "%)"?></td>
+                                    <td class="competencetablePercent"><?=$spansComp?></td>
+                                </tr>
+                            <?php
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
