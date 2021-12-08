@@ -168,8 +168,18 @@ header nav {
     width: 100%;
     height: auto;
     padding-top: 20px;
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+}
+
+.competencesDiv {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
     padding-bottom: 20px;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .historyDiv {
@@ -181,7 +191,7 @@ header nav {
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 10px;
 }
 
@@ -245,15 +255,15 @@ header nav {
 }
 
 .leftContent {
-    position: absolute;
     width: 50%;
-    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .rightContent {
-    position: absolute;
     width: 50%;
-    left: 50%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .navBarWindows {
@@ -285,4 +295,110 @@ header nav {
 .navBarWindows div a:hover {
     background-color: #ffffff;
     cursor: pointer;
+}
+
+.divComp {
+    position: relative;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.competencetableName {
+    width: 20%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.competencetablePercent {
+    width: 80%;
+    font-size: 0;
+}
+
+/*
+*
+* spans pour les bars de compétences
+*
+*/
+
+.spanComp {
+    width: 10%;
+    height: 100%;
+    height: 10px;
+    display: inline-flex;
+}
+
+.start-comp {
+    background-color: rgb(55, 204, 75);
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.middle-comp {
+    background-color: rgb(55, 204, 75);
+    border: none;
+}
+
+.middle-nocomp {
+    background-color: rgb(56, 56, 138);
+    border: none;
+}
+
+.end-nocomp {
+    background-color: rgb(56, 56, 138);
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.end-comp {
+    background-color: rgb(55, 204, 75);
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.competencesTable {
+    width: 100%;
+}
+
+.cvBaniereParent {
+    background-color: red;
+    width: 95%;
+    height: 300px;
+    position: relative;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.cvBaniere {
+    position: absolute;
+    background-color: rgb(44, 44, 116);
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-size: 100%;
+    background-position-y: center;
+}
+
+.cvImgprofile {
+    position: absolute;
+    background-color: brown;
+    width: 200px;
+    height: 200px;
+    left: 10px;
+    top: 63%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    background-size: 200px;
 }

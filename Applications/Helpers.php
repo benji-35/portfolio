@@ -178,4 +178,80 @@ class Helpers {
         }
         return false;
     }
+
+    public static function getMyProjects() {
+        global $db;
+        $res = array();
+        $connect = $db->connect();
+        if ($connect == null) {
+            return $res;
+        }
+        $stm = $connect->prepare("SELECT * FROM mprjct WHERE 1");
+        $stm->execute();
+        while ($resStm = $stm->fetch()) {
+            $projArray = array(
+                "name" => mb_convert_encoding($resStm['p_name'], "UTF-8", "ASCII"),
+                "startDate" => mb_convert_encoding($resStm['p_start'], "UTF-8", "ASCII"),
+                "endDate" => mb_convert_encoding($resStm['p_end'], "UTF-8", "ASCII"),
+                "descriptions" => array(),
+                "languages" => array(),
+                "initLang" => "en",
+            );
+            $splitted1 = explode(";", $resStm['description']);
+            foreach ($splitted1 as $lineIntel) {
+                $intels = explode(":", $lineIntel, 2);
+                if ($intels[0] == "initLang") {
+                    $projArray['initLang'] = $intels[1];
+                } else {
+                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8", "ASCII"));
+                    array_push($projArray['languages'], $intels[0]);
+                    array_push($projArray['descriptions'], $langArr);
+                }
+            }
+            array_push($res, $projArray);
+        }
+        $db->disconnect();
+        return $res;
+    }
+
+    public static function getMyExperiences():array {
+        global $db;
+        $res = array();
+        $connect = $db->connect();
+        if ($connect == null) {
+            return $res;
+        }
+        $stm = $connect->prepare("SELECT * FROM mexp WHERE 1");
+        $stm->execute();
+        while ($resStm = $stm->fetch()) {
+            $projArray = array(
+                "name" => array(),
+                "place" => mb_convert_encoding($resStm['m_place'], "UTF-8", "ASCII"),
+                "date" => mb_convert_encoding($resStm['m_date'], "UTF-8", "ASCII"),
+                "descriptions" => array(),
+                "languages" => array(),
+                "initLang" => "en",
+                "types" => mb_convert_encoding($resStm['m_type'], "UTF-8", "ASCII"),
+            );
+            $splitted1 = explode(";", $resStm['m_description']);
+            foreach ($splitted1 as $lineIntel) {
+                $intels = explode(":", $lineIntel, 2);
+                if ($intels[0] == "initLang") {
+                    $projArray['initLang'] = $intels[1];
+                } else {
+                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8", "ASCII"));
+                    array_push($projArray['languages'], mb_convert_encoding($intels[0], "UTF-8", "ASCII"));
+                    array_push($projArray['descriptions'], $langArr);
+                }
+            };
+            $splitted1 = explode(";", $resStm['m_name']);
+            foreach ($splitted1 as $name) {
+                $intelName = explode(":", $name, 2);
+                array_push($projArray['name'], array("lang" => $intelName[0], "name" => mb_convert_encoding($intelName[1], "UTF-8", "ASCII")));
+            }
+            array_push($res, $projArray);
+        }
+        $db->disconnect();
+        return $res;
+    }
 }

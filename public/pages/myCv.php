@@ -15,6 +15,8 @@
     if ($minHeight == 0) {
         $minHeight = $heightLangButton;
     }
+    $projects = $hlp->getMyProjects();
+    $experiences = $hlp->getMyExperiences();
 ?>
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
@@ -73,66 +75,68 @@
     <body>
         <div class="navBarWindows">
             <div>
-                <a href="cv">Mon CV</a>
+                <a href="cv"><?=$trans->getlanguage("myCv")?></a>
                 <a href="copies">Mes Copies</a>
                 <a href="projects">Mes Projets</a>
             </div>
         </div>
         <div class="mainContent">
-            <div class="alignDivs">
-                <div class="leftMainContent">
-                    <?= str_replace("\\n", "<br>", $trans->getlanguage("titleDescription")) ?>
+            <div class="cvBaniereParent">
+                <div class="cvBaniere" style="background-image: url('public/ressources/spacescape.jpg');">
+
                 </div>
-                <div class="rightMainContent">
-                    
+                <div class="cvImgprofile" style="background-image: url('public/ressources/photoMe.jpg');">
+
                 </div>
             </div>
             <div class="totalyMainContent">
                 <div class="leftContent">
                     <div class="historyDiv">
-                        <h2>My History</h2>
-                        <p>Born the 1st January 2002 in France,<br><br>
-                        I am a generalist course of the French school system. I obtained my baccalaureate in 2019 with the mention "Good".<br><br>
-                        I joined a school called Epitech in Rennes.<br><br>
-                        In 2018 I joined French Lifeguard (SNSM). During Summer I'm on beaches to save people and for the rest of the year I'm in rescue post or in ambulance.<br>
-                        With this I learned what give your life for others did mean. This passion takes me a lot of time.<br><br>
-                        From young to my 19 I was in swimming club with a regional level.
-                        </p>
+                        <h2><?=$trans->getlanguage("myHistoryTitle")?></h2>
+                        <p><?=$trans->getlanguage("myHistory")?></p>
                     </div>
                     <div class="historyDiv">
                         <div class="headerHistoryDiv">
-                            <h2>My Projects</h2>
+                            <h2><?=$trans->getlanguage("myProjectsTitle")?></h2>
                         </div>
-                        <div class="experienceDiv">
-                            <h3>CMS Kapweb</h3>
-                            <div class="headerExpDiv">
-                                <h5>Début : 10 Novembre 2021</h5>
-                                <h5>Fin : en cours de developpement</h5>
+                        <?php
+                            foreach ($projects as $project) {
+                                $descripProj = "";
+                                $targetLang = $_SESSION['lang'];
+                                $goodLang = false;
+                                foreach ($project['languages'] as $projectLanguage) {
+                                    if ($projectLanguage == $targetLang) {
+                                        $goodLang = true;
+                                        break;
+                                    }
+                                }
+                                if ($goodLang == false) {
+                                    $targetLang = $project['initLang'];
+                                }
+                                foreach ($project['descriptions'] as $descriptionProject) {
+                                    if ($descriptionProject['lang'] == $targetLang) {
+                                        $descripProj = $descriptionProject['description'];
+                                        break;
+                                    }
+                                }
+                        ?>
+                            <div class="experienceDiv">
+                                <h3><?= $project['name'] ?></h3>
+                                <div class="headerExpDiv">
+                                    <h5>Début : <?= $project['startDate'] ?></h5>
+                                    <h5>Fin : <?= $project['endDate'] ?></h5>
+                                </div>
+                                <p><?= $descripProj ?></p>
                             </div>
-                            <p>Développement du CMS kapweb (premières versions) disponible sur github</p>
-                        </div>
-                        <div class="experienceDiv">
-                            <h3>Indentation</h3>
-                            <div class="headerExpDiv">
-                                <h5>Début : 7 Janvier 2021</h5>
-                                <h5>Fin : 17 Mars 2021</h5>
-                            </div>
-                            <p>Programme permettant de vérifier la stylisation du code C avec le format Epitech (format 2021)</p>
-                        </div>
-                        <div class="experienceDiv">
-                            <h3>MGPB Experiment</h3>
-                            <div class="headerExpDiv">
-                                <h5>Début : 2 Avril 2021</h5>
-                                <h5>Fin : 4 Avril 2021</h5>
-                            </div>
-                            <p>MGPB Experiment un jeu dévloppé durant une JAM Epitech. On avait 72h pour créer</p>
-                        </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="rightContent">
                     <div class="historyDiv">
                         <div class="headerHistoryDiv">
-                            <h2>My experiences</h2>
+                            <h2><?=$trans->getlanguage("myExperiencesTitle")?></h2>
                             <select id="selectExp" onchange="filterExp()">
                                 <option selected value="0">All</option>
                                 <option value="1">Programming</option>
@@ -143,48 +147,182 @@
                             </select>
                         </div>
                         <div id="listExp">
-                            <div class="experienceDiv proExp rescueExp">
-                                <h3>Qualified Lifeguard</h3>
-                                <div class="headerExpDiv">
-                                    <h5>Place : Saint Malo, France</h5>
-                                    <h5>Date : Août 2020</h5>
+                            <?php
+                                foreach ($experiences as $experience) {
+                                    $descripProj = "";
+                                    $nameExp = "";
+                                    $targetLang = $_SESSION['lang'];
+                                    $goodLang = false;
+                                    foreach ($experience['languages'] as $projectLanguage) {
+                                        if ($projectLanguage == $targetLang) {
+                                            $goodLang = true;
+                                            break;
+                                        }
+                                    }
+                                    if ($goodLang == false) {
+                                        $targetLang = $experience['initLang'];
+                                    }
+                                    foreach ($experience['descriptions'] as $descriptionProject) {
+                                        if ($descriptionProject['lang'] == $targetLang) {
+                                            $descripProj = $descriptionProject['description'];
+                                            break;
+                                        }
+                                    }
+                                    foreach ($experience['name'] as $name) {
+                                        if ($name['lang'] == $targetLang) {
+                                            $nameExp = $name['name'];
+                                            break;
+                                        }
+                                    }
+                            ?>
+                                <div class="experienceDiv <?=$experience['types']?>">
+                                    <h3><?= $nameExp ?></h3>
+                                    <div class="headerExpDiv">
+                                        <h5>Place : <?= $experience['place'] ?></h5>
+                                        <h5>Date : <?= $experience['date'] ?></h5>
+                                    </div>
+                                    <p><?= $descripProj ?></p>
                                 </div>
-                                <p>Surveillance of the Minihic, Val and Bas-Sablons beaches</p>
-                            </div>
-                            <div class="experienceDiv proExp rescueExp">
-                                <h3>Stage de 3ème</h3>
-                                <div class="headerExpDiv">
-                                    <h5>Place : Rennes, France</h5>
-                                    <h5>Date : Mars 2017</h5>
-                                </div>
-                                <p>Discovery of the professions of the National Gendarmerie</p>
-                            </div>
-                            <div class="experienceDiv volExp rescueExp">
-                                <h3>Rescuer</h3>
-                                <div class="headerExpDiv">
-                                    <h5>Place : *not mentionned*</h5>
-                                    <h5>Date : 2018-2021</h5>
-                                </div>
-                                <p>Festival du Roi Arthur le 25 août 2019,<br>Matchs de Foot au Stade Rennais,<br>Championnat de France de Natation 2019,<br>Concours Hippiques à Maure de Bretagne,<br>Entraînement Super Motard</p>
-                            </div>
-                            <div class="experienceDiv volExp rescueExp">
-                                <h3>Chief of first aid station</h3>
-                                <div class="headerExpDiv">
-                                    <h5>Place : *not mentionned*</h5>
-                                    <h5>Date : 2018-2021</h5>
-                                </div>
-                                <p>Open de Tennis 2019 Rennes et Open de Tennis 2021 Rennes</p>
-                            </div>
-                            <div class="experienceDiv proExp progExp">
-                                <h3>Stage de 2ème année Epitech</h3>
-                                <div class="headerExpDiv">
-                                    <h5>Place : Granville, France</h5>
-                                    <h5>Date : 9 août 2021 - 23 décembre 2021</h5>
-                                </div>
-                                <p>Stage chez VDP 3.0 pour le dévloppement de l'application Quivive<sup>App</sup></p>
-                            </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="competencesDiv">
+                <div class="divComp">
+                    <h2><?=$trans->getlanguage("myCompetencesTitle")?></h2>
+                    <table class="competencesTable" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="competencetableName"></th>
+                                <th class="competencetablePercent"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="competencetableName">PHP (80%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">CSS (60%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">HTML (70%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">C (90%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">C# - Unity 3D (90%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">Python (40%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">Java (50%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="competencetableName">Javascript (20%)</td>
+                                <td class="competencetablePercent">
+                                    <span class="spanComp start-comp"></span>
+                                    <span class="spanComp middle-comp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp middle-nocomp"></span>
+                                    <span class="spanComp end-nocomp"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

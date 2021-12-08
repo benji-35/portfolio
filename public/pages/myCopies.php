@@ -73,7 +73,7 @@
     <body>
         <div class="navBarWindows">
             <div>
-                <a href="cv">Mon CV</a>
+                <a href="cv"><?=$trans->getlanguage("myCv")?></a>
                 <a href="copies">Mes Copies</a>
                 <a href="projects">Mes Projets</a>
             </div>

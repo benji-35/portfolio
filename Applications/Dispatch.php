@@ -6,10 +6,15 @@ class Dispatch {
     public function __construct() {}
 
     private static $dispatchInterface = "";
+    private static $dispatchEditInterface = "";
     private static $responderInterface = "<div class=\"responderInterface\">
         <div class=\"\"></div>
     </div>";
+    private static $callSignMenu = "";
+    //display all available calls
     private static $callInterface = "<div class=\"callInterface\"></div>";
+    //display the call menu to alert
+    private static $callMenu = "";
 
     private static function generateSid(int $time):string {
         $availableChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -227,13 +232,32 @@ class Dispatch {
         $serverTeams = self::getDispatchServerTeams();
         $serverTeams = array($serverTeams[$_SESSION['cTeam']]);
         $splitScreen = false;
-        if ($serverTeams[0]['iResp'] == true) {
+        if ($serverTeams[0]['iResp'] == true || $serverTeams[0]['cDisp'] == true) {
             $splitScreen = true;
         }
+        $rightIntels = "";
+        $leftIntels = "";
+        if ($serverTeams[0]['iResp'] == true && $serverTeams[0]['cDisp'] == false) {
+            $rightIntels .= self::$dispatchInterface;
+        } else if ($serverTeams[0]['iResp'] == false && $serverTeams[0]['cDisp'] == true) {
+            $rightIntels .= self::$dispatchEditInterface;
+        } else if ($serverTeams[0]['cDisp'] == true && $serverTeams[0]['iResp'] == true) {
+            $rightIntels .= self::$dispatchEditInterface;
+            $rightIntels .= self::$dispatchInterface;
+        }
+        if ($serverTeams[0]['iResp'] == true || $serverTeams[0]['cDisp'] == true) {
+            $leftIntels .= self::$callInterface;
+        }
+        if ($serverTeams[0]['ndClS'] == true) {
+            $leftIntels .= self::$callSignMenu;
+        }
+        if ($serverTeams[0]['cCall'] == true) {
+            $leftIntels .= self::$callMenu;
+        }
         if ($splitScreen) {
-            $res .= "<div></div>";
+            $res .= "<div class=\"splitScreen\"><div class=\"leftSplitScreen\">$leftIntels</div><div class=\"rightSplitScreen\">$rightIntels</div></div>";
         } else {
-            $res .= "";
+            $res .= "<div class=\"monoScreen\">$leftIntels</div>";
         }
         return $res;
     }

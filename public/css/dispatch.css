@@ -17,7 +17,6 @@ textarea:focus, input:focus{
 
 .header {
     width: 100%;
-    height: 10%;
     display: flex;
     align-items: center;
     background-color: rgb(58, 58, 58);
@@ -65,6 +64,8 @@ textarea:focus, input:focus{
     text-align: center;
     font-size: medium;
     color: rgb(141, 141, 141);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #boxContent {
@@ -226,7 +227,6 @@ textarea:focus, input:focus{
 }
 
 .disconnectButton {
-    margin-top: 10px;
     border: none;
     background-color: transparent;
     color: rgb(173, 18, 18);
@@ -240,7 +240,6 @@ textarea:focus, input:focus{
 }
 
 .shareButton {
-    margin-top: 10px;
     border: none;
     background-color: transparent;
     color: rgb(49, 173, 18);
@@ -332,4 +331,147 @@ textarea:focus, input:focus{
 .alignDivChooseAdd input {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.splitScreen {
+    display: inline-flex;
+    position: relative;
+    align-items: stretch;
+    width: 100%;
+}
+
+.leftSplitScreen {
+    width: 50%;
+    position: absolute;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    color: rgb(141, 141, 141);
+}
+
+.rightSplitScreen {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    color: rgb(141, 141, 141);
+}
+
+.monoScreen {
+    width: 100%;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    color: rgb(141, 141, 141);
+}
+
+/*
+*
+* Style Available Calls
+*
+*/
+
+.availableCallsDiv {
+    width: 100%;
+    max-height: 260px;
+    min-height: 200px;
+    background-color: #5b5b5b;
+    border: 2px solid black;
+    display: grid;
+}
+
+.headerAvailableCall {
+    width: 100%;
+    background-color: #333;
+    color: rgb(141, 141, 141);
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+.headerAvailableCall p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.listingAvailableCalls {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    background-color: #5b5b5b;
+}
+
+.callAlert {
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    border: 2px solid;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.callAlert button {
+    background-color: transparent;
+    border: none;
+}
+
+.callAlert button:hover {
+    cursor: pointer;
+}
+
+.editCall {
+    text-align: left;
+    border: 2px solid black;
+}
+
+.alignElementCallEdit {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(141, 141, 141);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.editFormCall label {
+    font-size: large;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.editFormCall {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.alignElementCallEdit input, .alignElementCallEdit textarea {
+    width: 80%;
+}
+
+.alignElementCallEdit button {
+    width: 20%;
+    background-color: transparent;
+    border: none;
+    color: rgb(141, 141, 141);
+}
+
+.alignElementCallEdit button:hover {
+    cursor: pointer;
+    color: white;
 }

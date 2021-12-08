@@ -350,12 +350,54 @@
                         </div>
                     <?php
                         } else {
-                            echo $dispatch->getBoxContainerDispatchServer();
-                            ?>
-                            <div class="responderInterface">
-                                <div class="headerInterface"></div>
+                            //echo $dispatch->getBoxContainerDispatchServer();
+                    ?>
+                    <div class="splitScreen">
+                        <div class="leftSplitScreen">
+                            <div class="availableCallsDiv">
+                                <div class="headerAvailableCall">
+                                    <p>Available Calls</p>
+                                </div>
+                                <div class="listingAvailableCalls">
+                                    <div class="callAlert">
+                                        <p>N°0000</p>
+                                        <button><i class='bx bx-show-alt bx-sm'></i></button>
+                                    </div>
+                                </div>
                             </div>
-                            <?php
+                            <div class="callSignMenu">
+
+                            </div>
+                            <div class="callMenu">
+
+                            </div>
+                        </div>
+                        <div class="rightSplitScreen">
+                            <div class="editCall">
+                                <form class="editFormCall" method="POST">
+                                    <label>From</label>
+                                    <div class="alignElementCallEdit">
+                                        <input type="text" placeholder="From...">
+                                        <button><i class='bx bx-save bx-md'></i></button>
+                                    </div>
+                                    <label>Place</label>
+                                    <div class="alignElementCallEdit">
+                                        <input type="text" placeholder="Place...">
+                                        <button><i class='bx bx-save bx-md'></i></button>
+                                    </div>
+                                    <label>Description</label>
+                                    <div class="alignElementCallEdit">
+                                        <textarea placeholder="Description..."></textarea>
+                                        <button><i class='bx bx-save bx-md'></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="responderCall">
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php
                         }
                     ?>
                 </div>
