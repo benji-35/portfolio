@@ -240,6 +240,7 @@ header nav {
 
 .headerHistoryDiv select {
     height: max-content;
+    width: 40%;
 }
 
 .experienceDiv {

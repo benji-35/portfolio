@@ -5,7 +5,6 @@ namespace Applications;
 use Exception;
 
 class Helpers {
-
     private static $errorsConnection = array(
         "Connect success !!",
         "Error while connect to database",
@@ -134,7 +133,71 @@ class Helpers {
         ));
         $db->disconnect();
         if (self::emailIsUSed($email) == true) {
-            return self::connectUser($pseudo, $email) * 10;
+            $headers = 'Content-type: text/html; charset=UTF-8' . "\r\n";
+            $accountCreateEmailContent = '
+                <html>
+                    <head>
+                        <title>Benjamin DELVERT [Création de votre compte]</title>
+                        <style>
+                            .allContent {
+                                width: 100%;
+                                position: relative;
+                                text-align: center;
+                            }
+                            .mainDiv {
+                                width: 400px;
+                                padding-top: 15px;
+                                padding-bottom: 15px;
+                                background-color: #f2f2f2;
+                                border: none;
+                                border-radius: 5px;
+                                
+                                position: relative;
+                                left: 50%;
+                                top: 50%;
+                                transform: translate(-50%, -50%);
+                                text-align: center;
+                            }
+                            
+                            ul {
+                                margin: 0;
+                                padding: 0;
+                            }
+
+                            .listingContent {
+                                width: 90%;
+                                text-align: left;
+                                position: relative;
+                                margin-left: 5%;
+                                margin-right: 5%
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="allContent">
+                        <center>
+                            <div class="mainDiv" style="box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
+                                <h2>Bonjour, ' . $pseudo . '</h2>
+                                <p>Merci de vous être inscrit sur le site Benjamin DELVERT. Vous pourrez profiter de tous les contenus du site internet.</p>
+                                <p>Vous pourrez bientôt retrouver un espace qui vous sera dédié pour votre compte et sa gestion.</p>
+                                <br>
+                                <h4>Contenue disponible pour le moment :</h4>
+                                <ul class="listingContent">
+                                    <li>Mon Portfolio</li>
+                                    <li>Mon CV</li>
+                                    <li>Mes copies de sites</li>
+                                    <li>Mes projets</li>
+                                    <li>Dispatch (site pour jeu Roleplay)</li>
+                                    <li>Discuss (système de discussion entre comptes créés)</li>
+                                </ul>
+                            </div>
+                            </center>
+                        </div>
+                    </body>
+                </html>
+                ';
+            mail($email, "Benjamin DELVERT [Création compte]", $accountCreateEmailContent, $headers);
+            return self::connectUser($pseudo, $pwd) * 10;
         }
         return 4;
     }
@@ -196,6 +259,7 @@ class Helpers {
                 "descriptions" => array(),
                 "languages" => array(),
                 "initLang" => "en",
+                "id" => $resStm['id'],
             );
             $splitted1 = explode(";", $resStm['description']);
             foreach ($splitted1 as $lineIntel) {
@@ -232,6 +296,7 @@ class Helpers {
                 "languages" => array(),
                 "initLang" => "en",
                 "types" => mb_convert_encoding($resStm['m_type'], "UTF-8", "ASCII"),
+                "id" => $resStm['id'],
             );
             $splitted1 = explode(";", $resStm['m_description']);
             foreach ($splitted1 as $lineIntel) {
@@ -266,6 +331,29 @@ class Helpers {
         $stm->execute();
         while ($resStm = $stm->fetch()) {
             array_push($res, $resStm);
+        }
+        $db->disconnect();
+        return $res;
+    }
+
+    public static function isAdm():bool {
+        global $db;
+
+        $res = false;
+        if (self::isConnected() == false) {
+            return $res;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return $res;
+        }
+        $stm = $connect->prepare("SELECT isAdm FROM account WHERE uid=? AND pseudo=?");
+        $stm->execute(array($_SESSION['uid'], $_SESSION['pseudo']));
+        $resStm = $stm->fetch();
+        if ($resStm) {
+            if ($resStm['isAdm'] == 1) {
+                $res = true;
+            }
         }
         $db->disconnect();
         return $res;
