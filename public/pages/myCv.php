@@ -51,6 +51,7 @@
             $edtInetls = array(
                 "type" => $intels[0],
                 "content" => array(),
+                "id" => $idTarget,
             );
             if ($edtInetls["type"] == "proj") {
                 foreach ($projects as $project) {
@@ -76,6 +77,42 @@
         }
     }
     if (isset($_POST['backEdit'])) {
+        header("location:" . $rtr->getMainUrl() . "/cv");
+    }
+    if (isset($_POST['validEdit'])) {
+        if ($edtInetls['type'] == "proj") {
+            $startDate = "__/__/____";
+            $endDate = "__/__/____";
+            $projName = $_POST['nameProjEdt'];
+            $initLang = $_POST['initLangProj'];
+            $lngs = $_POST['langsProjectEdit'];
+            $idElem = $_POST['idElem'];
+            $lngsArray = explode(";", $lngs);
+            $languages = array();
+            foreach ($lngsArray as $lng) {
+                $lngArr = array(
+                    "lang" => $lng,
+                    "descript" => "",
+                );
+                if (isset($_POST['descri-' . $lng])) {
+                    $lngArr['descript'] = $_POST['descri-' . $lng];
+                }
+                array_push($languages, $lngArr);
+            }
+            if (isset($_POST['startProj']) && $_POST['startProj'] != "") {
+                $startDate = date('d/m/Y', strtotime($_POST['startProj']));
+            }
+            if (isset($_POST['endProj']) && $_POST['endProj'] != "") {
+                $endDate = date('d/m/Y', strtotime($_POST['endProj']));
+            }
+            $hlp->updateProj($projName, $idElem, $initLang, $languages, $startDate, $endDate);
+        } else if ($edtInetls['type'] == "exp") {
+            $date = "__/__/____";
+            $place = "";
+
+        } else if ($edtInetls['type'] == "comp") {
+
+        }
         header("location:" . $rtr->getMainUrl() . "/cv");
     }
 ?>
@@ -326,7 +363,7 @@
             if ($isEditing == true && $isAdm == true) {
         ?>
             <style>
-                .navBarWindows, .mainContent {
+                header, .navBarWindows, .mainContent {
                     filter: blur(4px);
                     pointer-events: none;
                 }
@@ -335,23 +372,121 @@
                     position: absolute;
                     width: 400px;
                     left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
+                    top: 10px;
+                    transform: translate(-50%, 0);
                     background-color: #f2f2f2;
                     padding-top: 10px;
                     padding-bottom: 10px;
                     text-align: center;
+                    z-index: 2;
+                    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+                }
+
+                .popupEdit input {
+                    width: 80%;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    height: 30px;
+                }
+
+                .langEdit {
+                    width: 80%;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    text-align: center;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+
+                .langEdit textarea {
+                    width: 100%;
+                    resize: vertical;
                 }
             </style>
             <form class="popupEdit" method="POST">
                 <h2>Edition</h2>
+                <input type="number" value="<?=$edtInetls['id']?>" name="idElem" hidden>
                 <?php
                     if ($edtInetls['type'] == "proj") {
+                        $startDates = explode("/", $edtInetls['content']['startDate']);
+                        $startDate = $startDates[2] . "-" . $startDates[1] . "-" . $startDates[0];
+                        $endDates = explode("/", $edtInetls['content']['endDate']);
+                        $endDate = $endDates[2] . "-" . $endDates[1] . "-" . $endDates[0];
                 ?>
                     <input type="text" name="nameProjEdt" placeholder="Name project" value="<?=$edtInetls['content']['name']?>">
+                    <label>Début de projet : </label><input type="date" name="startProj" value="<?=$startDate?>">
+                    <label>Fin de projet : </label><input type="date" name="endProj" value="<?=$endDate?>">
+                    <label>Langage de base</label><input type="text" name="initLangProj" value="<?=$edtInetls['content']['initLang']?>">
+                    <?php
+                        $lngProj = "";
+                        foreach ($edtInetls['content']['languages'] as $language) {
+                            if ($lngProj == "") {
+                                $lngProj = $language;
+                            } else {
+                                $lngProj .= ";" . $language;
+                            }
+                    ?>
+                        <div class="langEdit">
+                            <p><?=$language?></p>
+                        <?php
+                            foreach ($edtInetls['content']['descriptions'] as $descri) {
+                                if ($descri['lang'] == $language) {
+                        ?>
+                            <textarea name="descri-<?=$language?>"><?=$descri['description']?></textarea>
+                        <?php
+                                }
+                            }
+                        ?>
+                        </div>
+                        <input type="text" value="<?=$lngProj?>" hidden name="langsProjectEdit">
+                    <?php
+                        }
+                    ?>
                 <?php
                     } else if ($edtInetls['type'] == "exp") {
                 ?>
+                    <label>Place</label>
+                    <input type="text" placeholder="Place..." value="<?=$edtInetls['content']['place']?>" name="placeExp">
+                    <label>Dates</label>
+                    <input type="text" placeholder="Date..." value="<?=$edtInetls['content']['date']?>" name="dateExp">
+                    <label>Langage initial</label>
+                    <input type="text" value="<?=$edtInetls['content']['initLang']?>" name="initLangExp">
+                    <?php
+                        $langugesStr = "";
+                        foreach ($edtInetls['content']['languages'] as $language) {
+                            $cName = "";
+                            $cDescript = "";
+                            if ($langugesStr == "") {
+                                $langugesStr = $language;
+                            } else {
+                                $langugesStr .= ";" . $language;
+                            }
+                            foreach ($edtInetls['content']['name'] as $name) {
+                                if ($name['lang'] == $language) {
+                                    $cName = $name['name'];
+                                    break;
+                                }
+                            }
+                            foreach ($edtInetls['content']['descriptions'] as $descipt) {
+                                if ($descipt['lang'] == $language) {
+                                    $cDescript = $descipt['description'];
+                                    break;
+                                }
+                            }
+                    ?>
+                        <div class="langEdit">
+                            <h4><?=$language?></h4>
+                            <label>Name</label>
+                            <input type="text" name="name-<?=$language?>" value="<?=$cName?>">
+                            <label>Description</label>
+                            <textarea name="descri-<?=$language?>" placeholder="Description..."><?=$cDescript?></textarea>
+                        </div>
+                    <?php
+                        }
+                    ?>
+                    <input hidden type="text" name="langsExp" value="<?=$langugesStr?>">
                 <?php
                     } else if ($edtInetls['type'] == "comp") {
                 ?>
@@ -359,7 +494,7 @@
                 <?php
                     }
                 ?>
-                <button type="submit">Valider</button>
+                <button type="submit" name="validEdit">Valider</button>
                 <button type="submit" name="backEdit">Retour</button>
             </form>
         <?php

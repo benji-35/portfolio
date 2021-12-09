@@ -242,7 +242,7 @@ class Helpers {
         return false;
     }
 
-    public static function getMyProjects() {
+    public static function getMyProjects():array {
         global $db;
         $res = array();
         $connect = $db->connect();
@@ -253,9 +253,9 @@ class Helpers {
         $stm->execute();
         while ($resStm = $stm->fetch()) {
             $projArray = array(
-                "name" => mb_convert_encoding($resStm['p_name'], "UTF-8", "ASCII"),
-                "startDate" => mb_convert_encoding($resStm['p_start'], "UTF-8", "ASCII"),
-                "endDate" => mb_convert_encoding($resStm['p_end'], "UTF-8", "ASCII"),
+                "name" => mb_convert_encoding($resStm['p_name'], "UTF-8"),
+                "startDate" => mb_convert_encoding($resStm['p_start'], "UTF-8"),
+                "endDate" => mb_convert_encoding($resStm['p_end'], "UTF-8"),
                 "descriptions" => array(),
                 "languages" => array(),
                 "initLang" => "en",
@@ -267,7 +267,7 @@ class Helpers {
                 if ($intels[0] == "initLang") {
                     $projArray['initLang'] = $intels[1];
                 } else {
-                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8", "ASCII"));
+                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8"));
                     array_push($projArray['languages'], $intels[0]);
                     array_push($projArray['descriptions'], $langArr);
                 }
@@ -290,12 +290,12 @@ class Helpers {
         while ($resStm = $stm->fetch()) {
             $projArray = array(
                 "name" => array(),
-                "place" => mb_convert_encoding($resStm['m_place'], "UTF-8", "ASCII"),
-                "date" => mb_convert_encoding($resStm['m_date'], "UTF-8", "ASCII"),
+                "place" => mb_convert_encoding($resStm['m_place'], "UTF-8"),
+                "date" => mb_convert_encoding($resStm['m_date'], "UTF-8"),
                 "descriptions" => array(),
                 "languages" => array(),
                 "initLang" => "en",
-                "types" => mb_convert_encoding($resStm['m_type'], "UTF-8", "ASCII"),
+                "types" => mb_convert_encoding($resStm['m_type'], "UTF-8"),
                 "id" => $resStm['id'],
             );
             $splitted1 = explode(";", $resStm['m_description']);
@@ -304,15 +304,15 @@ class Helpers {
                 if ($intels[0] == "initLang") {
                     $projArray['initLang'] = $intels[1];
                 } else {
-                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8", "ASCII"));
-                    array_push($projArray['languages'], mb_convert_encoding($intels[0], "UTF-8", "ASCII"));
+                    $langArr = array("lang" => $intels[0], "description" => mb_convert_encoding($intels[1], "UTF-8"));
+                    array_push($projArray['languages'], mb_convert_encoding($intels[0], "UTF-8"));
                     array_push($projArray['descriptions'], $langArr);
                 }
             };
             $splitted1 = explode(";", $resStm['m_name']);
             foreach ($splitted1 as $name) {
                 $intelName = explode(":", $name, 2);
-                array_push($projArray['name'], array("lang" => $intelName[0], "name" => mb_convert_encoding($intelName[1], "UTF-8", "ASCII")));
+                array_push($projArray['name'], array("lang" => $intelName[0], "name" => mb_convert_encoding($intelName[1], "UTF-8")));
             }
             array_push($res, $projArray);
         }
@@ -357,5 +357,59 @@ class Helpers {
         }
         $db->disconnect();
         return $res;
+    }
+
+    public static function updateProj(string $name, int $id, string $initLang, array $languages=array(), string $startDate = "", string $endDate = "") {
+        global $db;
+        if (self::isAdm() == false) {
+            return;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        $description = "initLang:" . $initLang;
+        foreach ($languages as $language) {
+            $description .= ";" . $language['lang'] . ":" . $language['descript'];
+        }
+        $stm = $connect->prepare("UPDATE mprjct SET p_name=?, p_start=?, p_end=?, description=? WHERE id=?");
+        $stm->execute(array(
+            $name,
+            $startDate,
+            $endDate,
+            $description,
+            $id
+        ));
+        $db->disconnect();
+    }
+
+    public static function updateExp(int $id, string $initLang, string $date, string $place, array $languages = array()) {
+        global $db;
+        if (self::isAdm() == false) {
+            return;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        $name = "";
+        $description = "initLang:" . $initLang;
+        foreach ($languages as $language) {
+            $description .= ";" . $language['lang'] . ":" . $language['descript'];
+            if ($name == "") {
+                $name = $language['lang'] . ":" . $language['name'];
+            } else {
+                $name .= ";" . $language['lang'] . ":" . $language['name'];
+            }
+        }
+        $stm = $connect->prepare("UPDATE mexp SET m_name=?, m_date=?, m_place=?, m_description=? WHERE id=?");
+        $stm->execute(array(
+            $name,
+            $date,
+            $place,
+            $description,
+            $id
+        ));
+        $db->disconnect();
     }
 }
