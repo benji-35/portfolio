@@ -34,14 +34,6 @@ function filterExp() {
                 children[i].style.display = "none";
             }
         }
-    } else if (val == 5) {
-        for (var i = 0; i < children.length; i++) {
-            if (children[i].classList.contains("ownExp")) {
-                children[i].style.display = "block";
-            } else {
-                children[i].style.display = "none";
-            }
-        }
     } else {
         for (var i = 0; i < children.length; i++) {
             if (children[i].style.display != "block") {

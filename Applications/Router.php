@@ -129,7 +129,7 @@ class Router {
         ),
         array(
             "name" => "cv",
-            "title" => "Mon CV",
+            "title" => "myCv",
             "url" => array("cv"),
             "php" => "myCv",
             "sessions_vars" => array(),
@@ -137,6 +137,7 @@ class Router {
             "css" => "mainPage",
             "js" => "mainPage",
             "isPhp" => true,
+            "translateTitle" => true,
         ),
     );
 

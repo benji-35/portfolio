@@ -10,6 +10,7 @@
         $minHeight += $heightLangButton;
         if (isset($_POST['changeLang-' . $language[0]])) {
             $_SESSION['lang'] = $language[0];
+            header("Refresh:0");
         }
     }
     if ($minHeight == 0) {

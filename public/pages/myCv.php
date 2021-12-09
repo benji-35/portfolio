@@ -10,6 +10,7 @@
         $minHeight += $heightLangButton;
         if (isset($_POST['changeLang-' . $language[0]])) {
             $_SESSION['lang'] = $language[0];
+            header("Refresh:0");
         }
     }
     if ($minHeight == 0) {
@@ -49,7 +50,7 @@
             <div class="logo">
                 <a href="<?= $rtr->getMainUrl() ?>"><img src="public/ressources/BDLogo.png" alt=""></a>
             </div> 
-            <div class="titleHeader">Portfolio</div>
+            <div class="titleHeader"><?=$trans->getlanguage("myCv")?></div>
             <div class="lang-menu">
                 <div class="selected-lang <?=$_SESSION['lang']?>">
                     <?=$hlp->getLangName($_SESSION['lang'])?>
@@ -139,12 +140,11 @@
                         <div class="headerHistoryDiv">
                             <h2><?=$trans->getlanguage("myExperiencesTitle")?></h2>
                             <select id="selectExp" onchange="filterExp()">
-                                <option selected value="0">All</option>
-                                <option value="1">Programming</option>
-                                <option value="2">Rescue</option>
-                                <option value="3">volunteering Experiences</option>
-                                <option value="4">Professional Experiences</option>
-                                <option value="5">Own Experiences</option>
+                                <option selected value="0"><?= $trans->getlanguage("w-all")?></option>
+                                <option value="1"><?= $trans->getlanguage("w-programming")?></option>
+                                <option value="2"><?= $trans->getlanguage("w-rescue")?></option>
+                                <option value="3"><?= $trans->getlanguage("vol-exps")?></option>
+                                <option value="4"><?= $trans->getlanguage("pro-exps")?></option>
                             </select>
                         </div>
                         <div id="listExp">
@@ -204,26 +204,15 @@
                         <tbody>
                             <?php
                                 foreach ($competences as $competence) {
-                                    $spansComp = "";
+                                    $competence['description'] = mb_convert_encoding($competence['description'], "UTF-8", "ASCII");
+                                    $competence['name'] = mb_convert_encoding($competence['name'], "UTF-8", "ASCII");
+                                    $spansComp = "<div class=\"divPercentParent\"><div style='width: " . $competence['percent'] . "%'><p>" . $competence['percent'] . "%</p></div></div>";
                                     $tmpPercent = $competence['percent'];
-                                    for ($i = 0; $i < 10; $i++) {
-                                        $prefix = "middle";
-                                        if ($i == 0) {
-                                            $prefix = "start";
-                                        } else if ($i == 9) {
-                                            $prefix = "end";
-                                        }
-                                        if ($tmpPercent <= 0) {
-                                            $spansComp .= "<span class=\"spanComp $prefix-nocomp\"></span>";
-                                        } else {
-                                            $spansComp .= "<span class=\"spanComp $prefix-comp\"></span>";
-                                        }
-                                        $tmpPercent -= 10;
-                                    }
                             ?>
                                 <tr>
-                                    <td class="competencetableName"><?=$competence['name'] . " (" . $competence['percent'] . "%)"?></td>
+                                    <td class="competencetableName"><?=$competence['name']?></td>
                                     <td class="competencetablePercent"><?=$spansComp?></td>
+                                    <td class="competencetableDescription"><?=$competence['description']?></td>
                                 </tr>
                             <?php
                                 }

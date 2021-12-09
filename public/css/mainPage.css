@@ -25,7 +25,7 @@ header {
 }
 
 header nav {
-    width: 960px;
+    width: 65%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -311,15 +311,22 @@ header nav {
 }
 
 .competencetableName {
-    width: 20%;
+    width: 30%;
     text-align: left;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .competencetablePercent {
-    width: 80%;
+    width: 40%;
     font-size: 0;
+}
+
+.competencetableDescription {
+    width: 30%;
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /*
@@ -408,4 +415,32 @@ header nav {
     transform: translateY(-50%);
     border-radius: 5px;
     background-size: 200px;
+}
+
+.divPercentParent {
+    position: relative;
+    height: 35px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+.divPercentParent div {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background-color: green;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    font-size: medium;
+}
+
+.divPercentParent div p {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
 }
