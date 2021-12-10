@@ -107,9 +107,35 @@
             }
             $hlp->updateProj($projName, $idElem, $initLang, $languages, $startDate, $endDate);
         } else if ($edtInetls['type'] == "exp") {
-            $date = "__/__/____";
-            $place = "";
-
+            $date = "__/__/____ - __/__/____";
+            $place = "?";
+            $initLang = "en";
+            if (isset($_POST['placeExp'])) {
+                $place = $_POST['placeExp'];
+            }
+            if (isset($_POST['dateExp'])) {
+                $date = $_POST['dateExp'];
+            }
+            if (isset($_POST['initLangExp'])) {
+                $initLang = $_POST['initLangExp'];
+            }
+            $lngs = explode(";", $_POST['langsExp']);
+            $languages = array();
+            foreach ($lngs as $lng) {
+                $lngArr = array(
+                    "lang" => $lng,
+                    "name" => "",
+                    "descript" => "",
+                );
+                if (isset($_POST['name-' . $lng])) {
+                    $lngArr['name'] = $_POST['name-' . $lng];
+                }
+                if (isset($_POST['descri-' . $lng])) {
+                    $lngArr['descript'] = $_POST['descri-' . $lng];
+                }
+                array_push($languages, $lngArr);
+            }
+            $hlp->updateExp($_POST['idElem'], $initLang, $date, $place, $languages);
         } else if ($edtInetls['type'] == "comp") {
 
         }
