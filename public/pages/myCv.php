@@ -28,7 +28,8 @@
             header("location:" . $rtr->getMainUrl() . "/cv&edt=proj;" . $project['id']);
         }
         if (isset($_POST['del-proj' . $project['id']])) {
-            
+            $hlp->deleteExpCompProj($project['id'], "proj");
+            header("location:" . $rtr->getMainUrl() . "/cv");
         }
     }
 
@@ -37,7 +38,18 @@
             header("location:" . $rtr->getMainUrl() . "/cv&edt=exp;" . $experience['id']);
         }
         if (isset($_POST['del-exp' . $experience['id']])) {
-            
+            $hlp->deleteExpCompProj($experience['id'], "exp");
+            header("location:" . $rtr->getMainUrl() . "/cv");
+        }
+    }
+
+    foreach ($competences as $competence) {
+        if (isset($_POST['edt-comp' . $competence['id']])) {
+            header("location:" . $rtr->getMainUrl() . "/cv&edt=comp;" . $competence['id']);
+        }
+        if (isset($_POST['del-comp' . $competence['id']])) {
+            $hlp->deleteExpCompProj($competence['id'], "comp");
+            header("location:" . $rtr->getMainUrl() . "/cv");
         }
     }
 

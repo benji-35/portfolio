@@ -412,4 +412,26 @@ class Helpers {
         ));
         $db->disconnect();
     }
+
+    public static function deleteExpCompProj(int $id, string $type="") {
+        global $db;
+        if (self::isAdm() == false) {
+            return;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        if ($type == "proj") {
+            $stm = $connect->prepare("DELETE FROM mprjct WHERE id=?");
+            $stm->execute(array($id));
+        } else if ($type == "exp") {
+            $stm = $connect->prepare("DELETE FROM mexp WHERE id=?");
+            $stm->execute(array($id));
+        } else if ($type = "comp") {
+            $stm = $connect->prepare("DELETE FROM mcomp WHERE id=?");
+            $stm->execute(array($id));
+        }
+        $db->disconnect();
+    }
 }
