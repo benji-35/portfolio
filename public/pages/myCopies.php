@@ -54,11 +54,11 @@
                 <?php
                     if ($hlp->isConnected()) {
                 ?>
-                    <button name="discoAccount">Disconnect</button>
+                     <button class="btnManageAccountMain" name="discoAccount"><i class='bx bxs-user-minus bx-md' ></i></button>
                 <?php
                     } else {
                 ?>
-                    <button name="coAccount">Connect</button>
+                    <button class="btnManageAccountMain" name="coAccount"><i class='bx bxs-user-plus bx-md'></i></button>
                 <?php
                     }
                 ?>
@@ -68,28 +68,25 @@
                 <a href="<?= $rtr->getMainUrl() ?>"><img src="public/ressources/BDLogo.png" alt=""></a>
             </div> 
             <div class="titleHeader"><?= $trans->getlanguage("myCopiesTitle") ?></div>
-            <div class="englobNavLang">
-                <div class="lang-menu">
-                    <div class="selected-lang <?=$_SESSION['lang']?>">
-                        <?=$hlp->getLangName($_SESSION['lang'])?>
-                    </div>
-                    <ul>
-                        <form method="POST">
-                        <?php
-                            foreach ($languages as $language) {
-                                if ($language[0] != $_SESSION['lang']) {
-                        ?>
-                        <li>
-                            <button type="submit" name="changeLang-<?=$language[0]?>" class="<?=$language[0]?>"><?=$language[1]?></button>
-                        </li>
-                        <?php
-                                }
-                            }
-                        ?>
-                        </form>
-                    </ul>
-                    
+            <div class="lang-menu">
+                <div class="selected-lang <?=$_SESSION['lang']?>">
+                    <?=$hlp->getLangName($_SESSION['lang'])?>
                 </div>
+                <ul>
+                    <form method="POST">
+                    <?php
+                        foreach ($languages as $language) {
+                            if ($language[0] != $_SESSION['lang']) {
+                    ?>
+                    <li>
+                        <button type="submit" name="changeLang-<?=$language[0]?>" class="<?=$language[0]?>"><?=$language[1]?></button>
+                    </li>
+                    <?php
+                            }
+                        }
+                    ?>
+                    </form>
+                </ul>
                 
             </div>
         </nav>

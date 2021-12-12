@@ -244,11 +244,11 @@
                 <?php
                     if ($hlp->isConnected()) {
                 ?>
-                    <button name="discoAccount">Disconnect</button>
+                     <button class="btnManageAccountMain" name="discoAccount"><i class='bx bxs-user-minus bx-md' ></i></button>
                 <?php
                     } else {
                 ?>
-                    <button name="coAccount">Connect</button>
+                    <button class="btnManageAccountMain" name="coAccount"><i class='bx bxs-user-plus bx-md'></i></button>
                 <?php
                     }
                 ?>
@@ -258,8 +258,7 @@
                 <a href="<?= $rtr->getMainUrl() ?>"><img src="public/ressources/BDLogo.png" alt=""></a>
             </div> 
             <div class="titleHeader"><?=$trans->getlanguage("myCv")?></div>
-            <div class="englobNavLang">
-                <div class="lang-menu">
+            <div class="lang-menu">
                     <div class="selected-lang <?=$_SESSION['lang']?>">
                         <?=$hlp->getLangName($_SESSION['lang'])?>
                     </div>
@@ -279,7 +278,6 @@
                         </form>
                     </ul>
                 </div>
-            </div>
         </nav>
     </header>
     <body>

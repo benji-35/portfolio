@@ -51,6 +51,7 @@ header nav {
     position: relative;
     transform: translateY(25%);
     text-align: left;
+    margin-top: 25px;
 }
 .lang-menu .selected-lang {
     display: flex;   
@@ -460,4 +461,14 @@ header nav {
 
 .discoAccount {
     margin-left: 10px;
+}
+
+.btnManageAccountMain {
+    background-color: transparent;
+    border: none;
+}
+
+.btnManageAccountMain:hover {
+    cursor: pointer;
+    color: #4d4d4d;
 }
