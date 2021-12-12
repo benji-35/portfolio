@@ -5,6 +5,11 @@
     $redirectConnect = "home";
     if (isset($_SESSION['connexionRedirect'])) {
         $redirectConnect = $_SESSION['connexionRedirect'];
+        if ($redirectConnect == "") {
+            $redirectConnect = $rtr->getMainUrl();
+        }
+    } else {
+        $redirectConnect = $rtr->getMainUrl();
     }
     if (isset($_POST['connect'])) {
         if (isset($_SESSION['connectError'])) {
@@ -12,6 +17,7 @@
         }
         $resConnect = $hlp->connectUser($_POST['pseudo'], $_POST['password']);
         if ($resConnect == 0) {
+            unset($_SESSION['connexionRedirect']);
             header("location: " . $redirectConnect);
         } else {
             $_SESSION['connectError'] = $hlp->getConnectionErrors($resConnect);
@@ -23,6 +29,7 @@
         }
         $resCreate = $hlp->createAccount($_POST['pseudoCr'], $_POST['passwordCr'], $_POST['emailCr']);
         if ($resCreate == 0) {
+            unset($_SESSION['connexionRedirect']);
             header("location: " . $redirectConnect);
         } else {
             $_SESSION['connectError'] = $hlp->getAccountCreationErrors($resCreate);

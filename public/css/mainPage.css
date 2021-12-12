@@ -48,7 +48,6 @@ header nav {
     width: 100px;
     text-align: right;
     font-weight: bold;
-    margin-top: 25px;
     position: relative;
     transform: translateY(25%);
     text-align: left;
@@ -204,18 +203,18 @@ header nav {
     font-weight: bold;
 }
 
-.hideLink {
+.accountArea {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translate(-120px, -50%);
 }
 
-.hideLink a i {
+.accountArea a i {
     color: transparent;
 }
 
-.hideLink a:hover i {
+.accountArea a:hover i {
     color: black;
 }
 
@@ -444,4 +443,21 @@ header nav {
     padding: 0;
     margin: 0;
     font-weight: bold;
+}
+
+.headerComp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.englobNavLang {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discoAccount {
+    margin-left: 10px;
 }

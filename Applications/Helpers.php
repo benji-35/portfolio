@@ -330,6 +330,11 @@ class Helpers {
         $stm = $connect->prepare("SELECT * FROM mcomp WHERE 1 ORDER BY percent DESC");
         $stm->execute();
         while ($resStm = $stm->fetch()) {
+            $encod = mb_detect_encoding($resStm['description']);
+            if ($encod != "UTF-8") {
+                $resStm['description'] = mb_convert_encoding($resStm['description'], "UTF-8");
+                $resStm['name'] = mb_convert_encoding($resStm['name'], "UTF-8");
+            }
             array_push($res, $resStm);
         }
         $db->disconnect();
@@ -413,6 +418,29 @@ class Helpers {
         $db->disconnect();
     }
 
+    public static function updateComp(int $id, string $name, int $percent, string $descript) {
+        global $db;
+        if (self::isAdm() == false) {
+            return;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        $encod = mb_detect_encoding($descript);
+        if ($encod != "UTF-8") {
+            $descript = mb_convert_encoding($descript, "UTF-8");
+        }
+        $stm = $connect->prepare("UPDATE mcomp SET name=?, percent=?, description=? WHERE id=?");
+        $stm->execute(array(
+            $name,
+            $percent,
+            $descript,
+            $id
+        ));
+        $db->disconnect();
+    }
+
     public static function deleteExpCompProj(int $id, string $type="") {
         global $db;
         if (self::isAdm() == false) {
@@ -432,6 +460,21 @@ class Helpers {
             $stm = $connect->prepare("DELETE FROM mcomp WHERE id=?");
             $stm->execute(array($id));
         }
+        $db->disconnect();
+    }
+
+    public static function addCompetence(string $name, int $percent, string $description) {
+        global $db;
+
+        if (self::isAdm() == false) {
+            return;
+        }
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        $stm = $connect->prepare("INSERT INTO mcomp (name, percent, description) VALUES (?, ?, ?)");
+        $stm->execute(array($name, $percent, $description));
         $db->disconnect();
     }
 }

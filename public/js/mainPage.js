@@ -42,3 +42,27 @@ function filterExp() {
         }
     }
 }
+
+function addProjLang() {
+    var allLang = document.getElementById("langsProjAdd");
+    var cNbLang = document.getElementById("cNbProjLang").value * 1;
+    var cIdLang = document.getElementById("cIdProjLang").value * 1;
+    var htmlToAdd = "<div class=\"langProjEditAdd\" id=\"lngProjAdd-" + cIdLang + "\">" +
+    "<input type=\"text\" name=\"lngShortProjAdd-" + cIdLang + "\" placeholder=\"Lang short (en)...\">"+
+    "<textarea name=\"lngDescShortProjAdd-" + cIdLang + "\" placeholder=\"\"></textarea>" +
+    "<button type=\"button\" onclick=\"removeLangProjAdd('lngProjAdd-" + cIdLang + "')\">Supprimer</button>" +
+    "</div>";
+
+    allLang.insertAdjacentHTML('afterend', htmlToAdd);
+    cNbLang = cNbLang + 1;
+    document.getElementById("cNbProjLang").value = cNbLang;
+    cIdLang = cIdLang + 1;
+    document.getElementById("cIdProjLang").value = cIdLang;
+}
+
+function removeLangProjAdd(idProjAddLang) {
+    document.getElementById(idProjAddLang).remove();
+    var cNbLang = document.getElementById("cNbProjLang").value * 1;
+    cNbLang--;
+    document.getElementById("cNbProjLang").value = cNbLang;
+}

@@ -31,7 +31,7 @@ class Router {
             "url" => array("connection"),
             "php" => "connection",
             "sessions_vars" => array(),
-            "needConnection" => true,
+            "needConnection" => false,
             "css" => "connection",
             "js" => "connection",
             "isPhp" => true,
@@ -219,7 +219,6 @@ class Router {
         /**
          * Suppression des valeurs des variables de session
          */
-        unset($_SESSION['connexionRedirect']);
         unset($_SESSION['cssPage']);
         unset($_SESSION['jsPage']);
         /**

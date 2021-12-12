@@ -149,9 +149,71 @@
             }
             $hlp->updateExp($_POST['idElem'], $initLang, $date, $place, $languages);
         } else if ($edtInetls['type'] == "comp") {
-
+            $name = "?";
+            $percent = 0;
+            $descript = "";
+            if (isset($_POST['nameComp'])) {
+                $name = $_POST['nameComp'];
+            }
+            if (isset($_POST['percentComp'])) {
+                $percent = $_POST['percentComp'];
+            }
+            if (isset($_POST['descriptComp'])) {
+                $descript = $_POST['descriptComp'];
+            }
+            $hlp->updateComp($_POST['idElem'], $name, $percent, $descript);
         }
         header("location:" . $rtr->getMainUrl() . "/cv");
+    }
+    if (isset($_POST['addExpEdt'])) {
+        header("location:" . $rtr->getMainUrl() . "/cv&addElem=exp");
+    }
+    if (isset($_POST['addProjEdt'])) {
+        header("location:" . $rtr->getMainUrl() . "/cv&addElem=proj");
+    }
+    if (isset($_POST['addCompEdt'])) {
+        header("location:" . $rtr->getMainUrl() . "/cv&addElem=comp");
+    }
+
+    $addElemType = "";
+    if (isset($_GET['addElem'])) {
+        if ($_GET['addElem'] == "exp" || $_GET['addElem'] == "proj" || $_GET['addElem'] == "comp") {
+            $addElemType = $_GET['addElem'];
+        }
+    }
+    if (isset($_POST['validEditAdd'])) {
+        if ($addElemType == "proj") {
+
+        }
+        if ($addElemType == "exp") {
+            
+        }
+        if ($addElemType == "comp") {
+            $name = "";
+            $percent = 0;
+            $description = "";
+            if (isset($_POST['nameCompAddEdt'])) {
+                $name = $_POST['nameCompAddEdt'];
+            }
+            if (isset($_POST['percentCompAddEdt'])) {
+                $percent = $_POST['percentCompAddEdt'];
+            }
+            if (isset($_POST['descCompAddEdt'])) {
+                $description = $_POST['descCompAddEdt'];
+            }
+            $hlp->addCompetence($name, $percent, $description);
+        }
+        header("location:" . $rtr->getMainUrl() . "/cv");
+    }
+
+    if (isset($_POST['discoAccount'])) {
+        $hlp->disconnectUser();
+        header("location:" . $rtr->getMainUrl() . "/cv");
+    }
+    if (isset($_POST['coAccount'])) {
+        unset($_SESSION['connexionRedirect']);
+        $_SESSION['connexionRedirect'] = $rtr->getMainUrl() . "/cv";
+        header("location: " . $rtr->getMainUrl() . "/connection");
     }
 ?>
 
@@ -177,35 +239,46 @@
     </head>
     <header>
         <nav>
-            <div class="hideLink">
-                <a href="<?= $rtr->getMainUrl() . "/hide" ?>">
-                    <i class='bx bxs-hide'></i>
-                </a>
+            <div class="accountArea">
+                <form method="POST">
+                <?php
+                    if ($hlp->isConnected()) {
+                ?>
+                    <button name="discoAccount">Disconnect</button>
+                <?php
+                    } else {
+                ?>
+                    <button name="coAccount">Connect</button>
+                <?php
+                    }
+                ?>
+                </form>
             </div>
             <div class="logo">
                 <a href="<?= $rtr->getMainUrl() ?>"><img src="public/ressources/BDLogo.png" alt=""></a>
             </div> 
             <div class="titleHeader"><?=$trans->getlanguage("myCv")?></div>
-            <div class="lang-menu">
-                <div class="selected-lang <?=$_SESSION['lang']?>">
-                    <?=$hlp->getLangName($_SESSION['lang'])?>
-                </div>
-                <ul>
-                    <form method="POST">
-                    <?php
-                        foreach ($languages as $language) {
-                            if ($language[0] != $_SESSION['lang']) {
-                    ?>
-                    <li>
-                        <button type="submit" name="changeLang-<?=$language[0]?>" class="<?=$language[0]?>"><?=$language[1]?></button>
-                    </li>
-                    <?php
+            <div class="englobNavLang">
+                <div class="lang-menu">
+                    <div class="selected-lang <?=$_SESSION['lang']?>">
+                        <?=$hlp->getLangName($_SESSION['lang'])?>
+                    </div>
+                    <ul>
+                        <form method="POST">
+                        <?php
+                            foreach ($languages as $language) {
+                                if ($language[0] != $_SESSION['lang']) {
+                        ?>
+                        <li>
+                            <button type="submit" name="changeLang-<?=$language[0]?>" class="<?=$language[0]?>"><?=$language[1]?></button>
+                        </li>
+                        <?php
+                                }
                             }
-                        }
-                    ?>
-                    </form>
-                </ul>
-                
+                        ?>
+                        </form>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -242,6 +315,13 @@
                         <div class="historyDiv">
                             <div class="headerHistoryDiv">
                                 <h2><?=$trans->getlanguage("myProjectsTitle")?></h2>
+                                <?php
+                                    if ($isAdm == true) {
+                                ?>
+                                    <button name="addProjEdt">Ajouter</button>
+                                <?php
+                                    }
+                                ?>
                             </div>
                             <?php
                                 foreach ($projects as $project) {
@@ -296,6 +376,13 @@
                                     <option value="3"><?= $trans->getlanguage("vol-exps")?></option>
                                     <option value="4"><?= $trans->getlanguage("pro-exps")?></option>
                                 </select>
+                                <?php
+                                    if ($isAdm == true) {
+                                ?>
+                                    <button name="addExpEdt">Ajouter</button>
+                                <?php
+                                    }
+                                ?>
                             </div>
                             <div id="listExp">
                                 <?php
@@ -351,7 +438,16 @@
             </div>
             <div class="competencesDiv">
                 <div class="divComp">
+                    <div class="headerComp">
                     <h2><?=$trans->getlanguage("myCompetencesTitle")?></h2>
+                    <?php
+                        if ($isAdm == true) {
+                    ?>
+                        <button name="addCompEdt">Ajouter</button>
+                    <?php
+                        }
+                    ?>
+                    </div>
                     <table class="competencesTable" cellspacing="0">
                         <thead>
                             <tr>
@@ -362,8 +458,6 @@
                         <tbody>
                             <?php
                                 foreach ($competences as $competence) {
-                                    $competence['description'] = mb_convert_encoding($competence['description'], "UTF-8", "ASCII");
-                                    $competence['name'] = mb_convert_encoding($competence['name'], "UTF-8", "ASCII");
                                     $spansComp = "<div class=\"divPercentParent\"><div style='width: " . $competence['percent'] . "%'><p>" . $competence['percent'] . "%</p></div></div>";
                                     $tmpPercent = $competence['percent'];
                             ?>
@@ -528,11 +622,109 @@
                 <?php
                     } else if ($edtInetls['type'] == "comp") {
                 ?>
-                    <h4>Type de contenue inconnue</h4>
+                    <input type="text" placeholder="Competence name..." name="nameComp" value="<?=$edtInetls['content']['name']?>">
+                    <input type="number" min="0" max="100" placeholder="Percent..." name="percentComp" value="<?=$edtInetls['content']['percent']?>">
+                    <textarea name="descriptComp"><?=$edtInetls['content']['description']?></textarea>
                 <?php
                     }
                 ?>
                 <button type="submit" name="validEdit">Valider</button>
+                <button type="submit" name="backEdit">Retour</button>
+            </form>
+        <?php
+            }
+            if ($addElemType != "") {
+        ?>
+            <style>
+                header, .navBarWindows, .mainContent {
+                    filter: blur(4px);
+                    pointer-events: none;
+                }
+
+                .popupEdit {
+                    position: absolute;
+                    width: 400px;
+                    left: 50%;
+                    top: 10px;
+                    transform: translate(-50%, 0);
+                    background-color: #f2f2f2;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    text-align: center;
+                    z-index: 2;
+                    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+                }
+
+                .popupEdit input, .langProjEditAdd input {
+                    width: 80%;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    height: 30px;
+                    margin-top: 4px;
+                    margin-bottom: 4px;
+                }
+
+                .langEdit {
+                    width: 80%;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    text-align: center;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+
+                .langEdit textarea, .langProjEditAdd textarea {
+                    width: 100%;
+                    resize: vertical;
+                    margin-top: 4px;
+                    margin-bottom: 4px;
+                }
+
+                .langProjEditAdd {
+                    width: 90%;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    border: 1px solid black;
+                    border-radius: 5px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    padding: 5px;
+                }
+            </style>
+            <form class="popupEdit" method="POST">
+                <h2>Ajout</h2>
+                <?php
+                    if ($addElemType == "proj") {
+                ?>
+                    <h1>Add project</h1>
+                    <label>Project Name</label>
+                    <input type="text" placeholder="Name..." name="nameAddProj">
+                    <label>Start project date</label>
+                    <input type="date" placeholder="Start project date..." name="startDateAddProj">
+                    <label>End project date</label>
+                    <input type="date" placeholder="End project date..." name="endDateAddProj">
+                    <button type="button" onclick="addProjLang()">Add Language</button>
+                    <input type="number" id="cNbProjLang" name="cNbProjLang" value="0" hidden>
+                    <input type="number" id="cIdProjLang" name="cIdProjLang" value="0" hidden>
+                    <div id="langsProjAdd">
+
+                    </div>
+                <?php
+                    } else if ($addElemType == "exp") {
+                ?>
+                    <h1>Add Experience</h1>
+                <?php
+                    } else if ($addElemType == "comp") {
+                ?>
+                    <input type="text" placeholder="Name..." name="nameCompAddEdt">
+                    <input type="number" min="0" max="100" name="percentCompAddEdt">
+                    <textarea placeholder="Description..." name="descCompAddEdt"></textarea>
+                <?php
+                    }
+                ?>
+                <button type="submit" name="validEditAdd">Valider</button>
                 <button type="submit" name="backEdit">Retour</button>
             </form>
         <?php
