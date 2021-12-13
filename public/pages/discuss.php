@@ -16,6 +16,16 @@
     if ($minHeight == 0) {
         $minHeight = $heightLangButton;
     }
+
+    if (isset($_POST['discoAccount'])) {
+        $hlp->disconnectUser();
+        header("location:" . $rtr->getMainUrl() . "/discuss");
+    }
+    if (isset($_POST['coAccount'])) {
+        unset($_SESSION['connexionRedirect']);
+        $_SESSION['connexionRedirect'] = $rtr->getMainUrl() . "/discuss";
+        header("location: " . $rtr->getMainUrl() . "/connection");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
@@ -39,6 +49,21 @@
     </head>
     <header>
         <nav>
+            <div class="accountArea">
+                <form method="POST">
+                <?php
+                    if ($hlp->isConnected()) {
+                ?>
+                     <button class="btnManageAccountMain" name="discoAccount"><i class='bx bxs-user-minus bx-md' ></i></button>
+                <?php
+                    } else {
+                ?>
+                    <button class="btnManageAccountMain" name="coAccount"><i class='bx bxs-user-plus bx-md'></i></button>
+                <?php
+                    }
+                ?>
+                </form>
+            </div>
             <div class="logo">
                 <a href="<?= $rtr->getMainUrl() ?>"><img src="public/ressources/BDLogo.png" alt=""></a>
             </div> 

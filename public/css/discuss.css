@@ -148,3 +148,27 @@ header nav {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.titleHeader {
+    position: absolute;
+    left: 50%;
+    top: 43px;
+    transform: translateX(-50%);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.accountArea {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-120px, -50%);
+}
+
+.accountArea a i {
+    color: transparent;
+}
+
+.accountArea a:hover i {
+    color: black;
+}
