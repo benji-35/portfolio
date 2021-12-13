@@ -172,3 +172,94 @@ header nav {
 .accountArea a:hover i {
     color: black;
 }
+
+.parentDiscusses {
+    width: 1000px;
+    background-color: #f2f2f2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    justify-content: stretch;
+    border-radius: 10px;
+    height: 600px;
+}
+
+.discussionsListPart, .messagesDiscussionPart {
+    position: relative;
+    width: 50%;
+    background-color: orange;
+}
+
+.discussionsListPart {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid gray;
+    border-style: none solid none none;
+}
+
+.messagesDiscussionPart {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid gray;
+    border-style: none none none solid;
+}
+
+.iSendMessage {
+    width: fit-content;
+    max-width: 80%;
+    min-width: 2%;
+    position: relative;
+    right: 2%;
+    background-color: rgb(168, 174, 255);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.otherSender {
+    width: fit-content;
+    max-width: 80%;
+    min-width: 2%;
+    position: relative;
+    left: 2%;
+    background-color: rgb(168, 255, 168);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.message {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.msgContent {
+    height: 560px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.msgSenderForm {
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+}
+
+#msgToSendEncoded {
+    width: 0;
+    background-color: transparent;
+    border: none;
+    display: none;
+}
+
+#msgToSendNormal {
+    width: 90%;
+}
+
+.msgSenderForm button {
+    width: 10%;
+}

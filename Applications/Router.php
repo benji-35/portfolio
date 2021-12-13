@@ -89,7 +89,7 @@ class Router {
             "sessions_vars" => array(),
             "needConnection" => true,
             "css" => "discuss",
-            "js" => "",
+            "js" => "discuss",
             "isPhp" => true,
             "translateTitle" => true,
         ),
