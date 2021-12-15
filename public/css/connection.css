@@ -45,7 +45,7 @@ a {
     margin-bottom: 10px;
 }
 
-#createAccount {
+#createAccount, #forgotPwd {
     display: none;
 }
 
@@ -53,6 +53,8 @@ a {
     background-color: transparent;
     border: none;
     transition: 0.2s;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .optionalBtns:hover {

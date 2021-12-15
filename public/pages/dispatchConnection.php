@@ -41,7 +41,6 @@
 <html lang="<?=$pageLang?>">
     <head>
         <title><?=$_SESSION['titlePage']?></title>
-        <link rel="icon" href="public/ressources/emergencyLogo.png">
         <meta charset="utf-8">
         <?php
             if (isset($_SESSION['cssPage'])) {
@@ -52,6 +51,11 @@
             if (isset($_SESSION['jsPage'])) {
         ?>
             <script type="text/javascript" src="<?=$_SESSION['jsPage']?>"></script>
+        <?php
+            }
+            if (isset($_SESSION['pageIcon'])) {
+        ?>
+            <link rel="icon" href="<?=$_SESSION['pageIcon']?>">
         <?php
             }
         ?>

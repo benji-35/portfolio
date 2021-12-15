@@ -24,6 +24,7 @@ class Router {
             "css" => "pageNotFound",
             "js" => "",
             "isPhp" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "connection",
@@ -35,6 +36,7 @@ class Router {
             "css" => "connection",
             "js" => "connection",
             "isPhp" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "googleSearch",
@@ -47,6 +49,7 @@ class Router {
             "css" => "googleSearch",
             "js" => "googleSearch",
             "isPhp" => true,
+            "icon" => "googleLogo2.webp",
         ),
         array(
             "name" => "main",
@@ -58,6 +61,7 @@ class Router {
             "css" => "mainPage",
             "js" => "mainPage",
             "isPhp" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "mainHide",
@@ -69,6 +73,7 @@ class Router {
             "css" => "mainHide",
             "js" => "mainHide",
             "isPhp" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "myCopies",
@@ -80,6 +85,7 @@ class Router {
             "css" => "myCopies",
             "js" => "",
             "isPhp" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "discuss",
@@ -92,6 +98,7 @@ class Router {
             "js" => "discuss",
             "isPhp" => true,
             "translateTitle" => true,
+            "icon" => "BDLogo.png",
         ),
         array(
             "name" => "youtube",
@@ -103,6 +110,7 @@ class Router {
             "css" => "youtube",
             "js" => "",
             "isPhp" => true,
+            "icon" => "YoutubeLogo.svg",
         ),
         array(
             "name" => "dispatch",
@@ -115,6 +123,7 @@ class Router {
             "js" => "dispatch",
             "isPhp" => true,
             "connectionPage" => "dispatchConnection",
+            "icon" => "emergencyLogo.png",
         ),
         array(
             "name" => "dispatchConnection",
@@ -126,6 +135,7 @@ class Router {
             "css" => "dispatchConnection",
             "js" => "connection",
             "isPhp" => true,
+            "icon" => "emergencyLogo.png",
         ),
         array(
             "name" => "cv",
@@ -138,6 +148,7 @@ class Router {
             "js" => "mainPage",
             "isPhp" => true,
             "translateTitle" => true,
+            "icon" => "BDLogo.png",
         ),
     );
 
@@ -221,6 +232,7 @@ class Router {
          */
         unset($_SESSION['cssPage']);
         unset($_SESSION['jsPage']);
+        unset($_SESSION['pageIcon']);
         /**
          * Vérification si la page à besoin d'un connexion, si l'utilisateur est bien connecté.
          * /!\ Si le site n'a pas besoin de connexion, on peut supprimer la condition juste en dessous /!\
@@ -249,6 +261,9 @@ class Router {
             } else {
                 $_SESSION['cssPage'] = self::$pathes['css'] . self::$pages[$found]['css'] . ".css";
             }
+        }
+        if (isset(self::$pages[$found]['icon']) && self::$pages[$found]['icon'] != "") {
+            $_SESSION['pageIcon'] = "public/ressources/" . self::$pages[$found]['icon'];
         }
         if (isset(self::$pages[$found]['js']) && self::$pages[$found]['js'] != "") {
             $_SESSION['jsPage'] = self::$pathes['js'] . self::$pages[$found]['js'] . ".js";

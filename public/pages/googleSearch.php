@@ -15,8 +15,12 @@
         <script src="<?=$_SESSION['jsPage']?>"></script>
         <?php
             }
+            if (isset($_SESSION['pageIcon'])) {
         ?>
-        <link rel="icon" href="public/ressources/googleLogo2.webp">
+            <link rel="icon" href="<?=$_SESSION['pageIcon']?>">
+        <?php
+            }
+        ?>
     </head>
     <header>
         <div class="googleAccount">

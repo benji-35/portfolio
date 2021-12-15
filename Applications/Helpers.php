@@ -21,6 +21,8 @@ class Helpers {
         20 => "Email or password are bad while try to connect",
     );
 
+    private static $lengthPathForgotPwd = 50;
+
     public function __construct(){}
 
 
@@ -476,5 +478,152 @@ class Helpers {
         $stm = $connect->prepare("INSERT INTO mcomp (name, percent, description) VALUES (?, ?, ?)");
         $stm->execute(array($name, $percent, $description));
         $db->disconnect();
+    }
+
+    public static function forgotPassword(string $email) {
+        global $db, $rtr;
+
+        $chars_available = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+        $savailable = strlen($chars_available);
+        $pathFound = false;
+        $path = "";
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        
+        do {
+            $path = "";
+            $pathFound = true;
+            for ($i = 0; $i < self::$lengthPathForgotPwd; $i++) {
+                $path .= $chars_available[rand(0, ($savailable - 1))];
+            }
+            $stm = $connect->prepare("SELECT * FROM fpwd WHERE path=?");
+            $stm->execute(array($path));
+            if ($stm->fetch()) {
+                $pathFound = false;
+            }
+        } while ($pathFound == false);
+        $mailSubject = "Mot de passe oublié [Benjamin DELEVRT]";
+        $mailMessage = '
+        <html>
+            <head>
+                <title>Benjamin DELVERT [Oublie de votre mot de passe]</title>
+                <style>
+                    .allContent {
+                        width: 100%;
+                        position: relative;
+                        text-align: center;
+                    }
+                    .mainDiv {
+                        width: 400px;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        background-color: #f2f2f2;
+                        border: none;
+                        border-radius: 5px;
+                        
+                        position: relative;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                    }
+                    
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .listingContent {
+                        width: 90%;
+                        text-align: left;
+                        position: relative;
+                        margin-left: 5%;
+                        margin-right: 5%
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="allContent">
+                <center>
+                    <div class="mainDiv" style="box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
+                        <h2>Bonjour,</h2>
+                        <p>Vous nous avez fait part de votre oublie de mot de passe.</p>
+                        <p>Vous pouvez dès à présent le récupérer en cliquant sur le lien juste en dessous</p>
+                        <a href="' . $rtr->getMainUrl() . '/connection&lkpwd=' . $path . '">Je récupère mon mot de passe</a>
+                        <br>
+                        <br>
+                        <p>Si vous n\'êtes pas à l\'origine de cette action, vous pouvez tout de même cliquer sur le lien et cliquer sur le bouton ce n\'est pas moi.</p>
+                        <br><br><br>
+                        <p>Si vous avez besoin d\'aide n\'hésitez pas à nous contacter via le site internet sur la page qui y est consacré.</p>
+                        <br>
+                        <br>
+                        <p>Vous souhaitant bonne journée</p><br>
+                        <p>Benjamin DELVERT</p>
+                    </div>
+                    </center>
+                </div>
+            </body>
+        </html>
+        ';
+        $mailHeaders = 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        if (mail($email, $mailSubject, $mailMessage, $mailHeaders) == false) {
+            $db->disconnect();
+            return;
+        }
+        $stm = $connect->prepare("INSERT INTO fpwd (path, email) VALUES (?, ?)");
+        $stm->execute(array($path, $email));
+        $db->disconnect();
+
+    }
+
+    public static function setNewPwd(string $path, string $email, string $pwd) {
+        global $db, $rtr;
+
+        $connect = $db->connect();
+        if ($connect == null) {
+            return;
+        }
+        $stm = $connect->prepare("SELECT * FROM fpwd WHERE path=? AND email=? AND used=0");
+        $stm->execute(array(
+            $path,
+            $email,
+        ));
+        $resStm = $stm->fetch();
+        if ($resStm) {
+            $compPwd = password_hash($pwd, PASSWORD_DEFAULT);
+            $stm = $connect->prepare("UPDATE account SET pwd=? WHERE email=?");
+            $stm->execute(array(
+                $compPwd,
+                $email
+            ));
+            $stm = $connect->prepare("UPDATE fpwd SET used=1 WHERE path=? AND email=?");
+            $stm->execute(array(
+                $path,
+                $email,
+            ));
+        }
+        $db->disconnect();
+    }
+
+    public static function isPathChangePasswordAvailable(string $path):bool {
+        global $db;
+        $res = false;
+
+        $connect = $db->connect();
+        if ($connect == null) {
+            return $res;
+        }
+        $stm = $connect->prepare("SELECT * FROM fpwd WHERE path=?");
+        $stm->execute(array($path));
+        $resStm = $stm->fetch();
+        if ($resStm) {
+            if ($resStm['used'] == 0) {
+                $res = true;
+            }
+        }
+        $db->disconnect();
+        return $res;
     }
 }

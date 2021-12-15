@@ -30,7 +30,6 @@
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
     <head>
-        <link rel="icon" href="public/ressources/BDLogo.png">
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <title><?=$_SESSION['titlePage']?></title>
         <meta charset="utf-8">
@@ -43,6 +42,11 @@
             if (isset($_SESSION['jsPage'])) {
         ?>
             <script src="<?=$_SESSION['jsPage']?>"></script>
+        <?php
+            }
+            if (isset($_SESSION['pageIcon'])) {
+        ?>
+            <link rel="icon" href="<?=$_SESSION['pageIcon']?>">
         <?php
             }
         ?>
