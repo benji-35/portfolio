@@ -58,11 +58,11 @@
                 <?php
                     if ($hlp->isConnected()) {
                 ?>
-                     <button class="btnManageAccountMain" name="discoAccount"><i class='bx bxs-user-minus bx-md' ></i></button>
+                     <button class="btnManageAccountMain" name="discoAccount" title="<?= $trans->getlanguage("w-logout", "Log out") ?>"><i class='bx bxs-user-minus bx-md' ></i></button>
                 <?php
                     } else {
                 ?>
-                    <button class="btnManageAccountMain" name="coAccount"><i class='bx bxs-user-plus bx-md'></i></button>
+                    <button class="btnManageAccountMain" name="coAccount" title="<?= $trans->getlanguage("w-login", "Log in") ?>"><i class='bx bxs-user-plus bx-md'></i></button>
                 <?php
                     }
                 ?>
@@ -98,8 +98,8 @@
         <div class="navBarWindows">
             <div>
                 <a href="cv"><?=$trans->getlanguage("myCv")?></a>
-                <a href="copies">Mes Copies</a>
-                <a href="projects">Mes Projets</a>
+                <a href="copies"><?=$trans->getlanguage("myCopies", "My copies")?></a>
+                <a href="projects"><?=$trans->getlanguage("myProjectsTitle", "My projects")?></a>
             </div>
         </div>
         <div class="mainContent">

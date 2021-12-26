@@ -99,8 +99,8 @@
         <div class="navBarWindows">
             <div>
                 <a href="cv"><?=$trans->getlanguage("myCv")?></a>
-                <a href="copies">Mes Copies</a>
-                <a href="projects">Mes Projets</a>
+                <a href="copies"><?=$trans->getlanguage("myCopies", "My copies")?></a>
+                <a href="projects"><?=$trans->getlanguage("myProjectsTitle", "My projects")?></a>
             </div>
         </div>
         <div class="mainContent">

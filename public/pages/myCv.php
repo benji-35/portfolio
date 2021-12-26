@@ -288,13 +288,13 @@
         <div class="navBarWindows">
             <div>
                 <a href="cv"><?=$trans->getlanguage("myCv")?></a>
-                <a href="copies">Mes Copies</a>
-                <a href="projects">Mes Projets</a>
+                <a href="copies"><?=$trans->getlanguage("myCopies", "My copies")?></a>
+                <a href="projects"><?=$trans->getlanguage("myProjectsTitle", "My projects")?></a>
             </div>
         </div>
         <div class="mainContent">
             <div class="cvBaniereParent">
-                <div class="cvBaniere" style="background-image: url('public/ressources/spacescape.jpg');">
+                <div class="cvBaniere" style="background-image: url('public/ressources/planet1.jpg');">
 
                 </div>
                 <div class="cvImgprofile" style="background-image: url('public/ressources/photoMe.jpg');">
