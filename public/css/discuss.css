@@ -52,6 +52,7 @@ header nav {
     position: relative;
     transform: translateY(25%);
     text-align: left;
+    height: 50px;
 }
 .lang-menu .selected-lang {
     display: flex;   
