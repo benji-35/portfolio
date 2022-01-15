@@ -473,3 +473,7 @@ header nav {
     cursor: pointer;
     color: #4d4d4d;
 }
+
+#hiddingIntelsFront {
+    display: none;
+}

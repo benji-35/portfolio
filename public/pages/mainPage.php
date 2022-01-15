@@ -26,6 +26,7 @@
         $_SESSION['connexionRedirect'] = $rtr->getMainUrl();
         header("location: " . $rtr->getMainUrl() . "/connection");
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
@@ -99,6 +100,12 @@
         </nav>
     </header>
     <body>
+        <div id="hiddingIntelsFront">
+            <input type="text" id="phraseTitle1" value="<?=$trans->getlanguage("phraseTitle1", "Phrase 1 not found !")?>">
+            <input type="text" id="phraseTitle2" value="<?=$trans->getlanguage("phraseTitle2", "Phrase 2 not found !")?>">
+            <input type="text" id="phraseTitle3" value="<?=$trans->getlanguage("phraseTitle3", "Phrase 3 not found !")?>">
+            <input type="text" id="phraseTitle4" value="<?=$trans->getlanguage("phraseTitle4", "Phrase 4 not found !")?>">
+        </div>
         <div class="navBarWindows">
             <div>
                 <a href="cv"><?=$trans->getlanguage("myCv")?></a>
