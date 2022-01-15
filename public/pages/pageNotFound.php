@@ -10,9 +10,11 @@
         <meta charset="utf-8">
         <?php
             if (isset($_SESSION['cssPage'])) {
+                foreach ($_SESSION['cssPage'] as $cssScript) {
         ?>
-            <link href="<?=$_SESSION['cssPage']?>" rel="stylesheet">
+            <link rel="stylesheet" href="<?=$cssScript?>">
         <?php
+                }
             }
             if (isset($_SESSION['jsPage'])) {
                 foreach ($_SESSION['jsPage'] as $jsScript) {

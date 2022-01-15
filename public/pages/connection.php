@@ -59,9 +59,11 @@
         <meta charset="utf-8">
         <?php
             if (isset($_SESSION['cssPage'])) {
+                foreach ($_SESSION['cssPage'] as $cssScript) {
         ?>
-            <link rel="stylesheet" href="<?=$_SESSION['cssPage']?>">
+            <link rel="stylesheet" href="<?=$cssScript?>">
         <?php
+                }
             }
             if (isset($_SESSION['jsPage'])) {
                 foreach ($_SESSION['jsPage'] as $jsScript) {

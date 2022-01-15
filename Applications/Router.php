@@ -21,8 +21,8 @@ class Router {
             "php" => "pageNotFound",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "pageNotFound",
-            "js" => "",
+            "css" => array("pageNotFound"),
+            "js" => array(),
             "isPhp" => true,
             "icon" => "BDLogo.png",
         ),
@@ -33,7 +33,7 @@ class Router {
             "php" => "connection",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "connection",
+            "css" => array("connection"),
             "js" => array("connection"),
             "isPhp" => true,
             "icon" => "BDLogo.png",
@@ -46,7 +46,7 @@ class Router {
             "php" => "googleSearch",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "googleSearch",
+            "css" => array("googleSearch"),
             "js" => array("googleSearch"),
             "isPhp" => true,
             "icon" => "googleLogo2.webp",
@@ -58,7 +58,7 @@ class Router {
             "php" => "mainPage",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "mainPage",
+            "css" => array("mainPage"),
             "js" => array("mainPage", "titleAnim"),
             "isPhp" => true,
             "icon" => "BDLogo.png",
@@ -70,7 +70,7 @@ class Router {
             "php" => "mainHide",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "mainHide",
+            "css" => array("mainHide"),
             "js" => array("mainHide"),
             "isPhp" => true,
             "icon" => "BDLogo.png",
@@ -82,7 +82,7 @@ class Router {
             "php" => "myCopies",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "myCopies",
+            "css" => array("myCopies"),
             "js" => array(),
             "isPhp" => true,
             "icon" => "BDLogo.png",
@@ -94,7 +94,7 @@ class Router {
             "php" => "discuss",
             "sessions_vars" => array(),
             "needConnection" => true,
-            "css" => "discuss",
+            "css" => array("discuss"),
             "js" => array("discuss"),
             "isPhp" => true,
             "translateTitle" => true,
@@ -107,7 +107,7 @@ class Router {
             "php" => "youtube",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "youtube",
+            "css" => array("youtube"),
             "js" => array(),
             "isPhp" => true,
             "icon" => "YoutubeLogo.svg",
@@ -119,7 +119,7 @@ class Router {
             "php" => "dispatch",
             "sessions_vars" => array(),
             "needConnection" => true,
-            "css" => "dispatch",
+            "css" => array("dispatch"),
             "js" => array("dispatch"),
             "isPhp" => true,
             "connectionPage" => "dispatchConnection",
@@ -132,7 +132,7 @@ class Router {
             "php" => "dispatchConnection",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "dispatchConnection",
+            "css" => array("dispatchConnection"),
             "js" => array("connection"),
             "isPhp" => true,
             "icon" => "emergencyLogo.png",
@@ -144,7 +144,7 @@ class Router {
             "php" => "myCv",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => "mainPage",
+            "css" => array("mainPage"),
             "js" => array("mainPage"),
             "isPhp" => true,
             "translateTitle" => true,
@@ -255,12 +255,12 @@ class Router {
          * Remplir les variables de session pour le langage, le css, le js, ls titre de la page
          */
         $_SESSION['titlePage'] = self::$pages[$found]['title'];
-        if (isset(self::$pages[$found]['css']) && self::$pages[$found]['css'] != "") {
-            if (isset(self::$pages[$found]['isScss']) && self::$pages[$found]['isScss'] == true) {
-                $_SESSION['cssPage'] = self::$pathes['css'] . self::$pages[$found]['css'] . ".scss";
-            } else {
-                $_SESSION['cssPage'] = self::$pathes['css'] . self::$pages[$found]['css'] . ".css";
+        if (isset(self::$pages[$found]['css']) && count(self::$pages[$found]['css']) > 0) {
+            $tmpArr = self::$pages[$found]['css'];
+            foreach ($tmpArr as $i => $tmp) {
+                $tmpArr[$i] = self::$pathes['css'] . $tmp . ".css";
             }
+            $_SESSION['cssPage'] = $tmpArr;
         }
         if (isset(self::$pages[$found]['icon']) && self::$pages[$found]['icon'] != "") {
             $_SESSION['pageIcon'] = "public/ressources/" . self::$pages[$found]['icon'];
