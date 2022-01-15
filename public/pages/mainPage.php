@@ -40,9 +40,11 @@
         <?php
             }
             if (isset($_SESSION['jsPage'])) {
+                foreach ($_SESSION['jsPage'] as $jsScript) {
         ?>
-            <script src="<?=$_SESSION['jsPage']?>"></script>
+            <script src="<?=$jsScript?>"></script>
         <?php
+                }
             }
             if (isset($_SESSION['pageIcon'])) {
         ?>
@@ -103,16 +105,8 @@
             </div>
         </div>
         <div class="mainContent">
-            <div class="alignDivs">
-                <div class="leftMainContent">
-                    <?= str_replace("\\n", "<br>", $trans->getlanguage("titleDescription")) ?>
-                </div>
-                <div class="rightMainContent">
-                    
-                </div>
-            </div>
-            <div class="totalyMainContent">
-
+            <div class="middleDiv">
+                <h1 id="titleAnimated"></h1>
             </div>
         </div>
     </body>

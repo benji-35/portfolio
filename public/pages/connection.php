@@ -64,9 +64,11 @@
         <?php
             }
             if (isset($_SESSION['jsPage'])) {
+                foreach ($_SESSION['jsPage'] as $jsScript) {
         ?>
-            <script type="text/javascript" src="<?=$_SESSION['jsPage']?>"></script>
+            <script src="<?=$jsScript?>"></script>
         <?php
+                }
             }
             if (isset($_SESSION['pageIcon'])) {
         ?>
