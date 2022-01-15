@@ -717,9 +717,27 @@
                     } else if ($addElemType == "exp") {
                 ?>
                     <h1>Add Experience</h1>
+                    <form method="POST">
+                        <label>Start date</label>
+                        <input type="date" placeholder="Start date" name="startDateAddExp">
+                        <label>End date</label>
+                        <input type="date" placeholder="End date" name="endDateAddExp">
+                        <label>Place</label>
+                        <input type="text" placeholder="Place..." name="placeAddExp">
+                        <h3>English</h3>
+                        <input type="text" placeholder="Name..." name="nameAddExp-en">
+                        <textarea placeholder="Description..." name="descriptionAddExp-en"></textarea>
+                        <div id="langsListingIds" style="display: none;"></div>
+                        <div id="langExpadd"></div>
+                        <input type="number" name="nbMaxLangAddExp" id="nbMaxLangAddExp" value="0" min="0" hidden>
+                        <input type="number" name="cuurLangInListAddExp" id="cuurLangInListAddExp" value="0" min="0" hidden>
+                        <button type="button" onclick="addExpLang()">Add language</button>
+                        <button type="submit">Add Experience</button>
+                    </form>
                 <?php
                     } else if ($addElemType == "comp") {
                 ?>
+                    <h1>Add Competence</h1>
                     <input type="text" placeholder="Name..." name="nameCompAddEdt">
                     <input type="number" min="0" max="100" name="percentCompAddEdt">
                     <textarea placeholder="Description..." name="descCompAddEdt"></textarea>
