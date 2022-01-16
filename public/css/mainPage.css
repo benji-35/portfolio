@@ -477,3 +477,15 @@ header nav {
 #hiddingIntelsFront {
     display: none;
 }
+
+.titleAnim {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.titleAnim h1 {
+    font-size: xxx-large;
+    font-weight: bold;
+}

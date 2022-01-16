@@ -114,8 +114,27 @@
             </div>
         </div>
         <div class="mainContent">
-            <div class="middleDiv">
+            <div class="titleAnim">
                 <h1 id="titleAnimated"></h1>
+            </div>
+            <div class="addons">
+                <div class="addonsDiv dispatchAddon">
+
+                </div>
+                <div class="addonsDiv discussAddon">
+
+                </div>
+            </div>
+            <div class="news">
+                <div class="newsDiv left">
+                    
+                </div>
+                <div class="newsDiv right">
+
+                </div>
+                <div class="newsDiv left">
+
+                </div>
             </div>
         </div>
     </body>
