@@ -144,7 +144,7 @@ class Router {
             "php" => "myCv",
             "sessions_vars" => array(),
             "needConnection" => false,
-            "css" => array("mainPage"),
+            "css" => array("mainPage", "resumePrinting"),
             "js" => array("mainPage"),
             "isPhp" => true,
             "translateTitle" => true,
