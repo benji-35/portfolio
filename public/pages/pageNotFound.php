@@ -1,6 +1,8 @@
 <?php
     global $db, $rtr, $hlp, $trans;
 
+    $url = $rtr->getMainUrl() . "/";
+
 ?>
 <!DOCTYPE html>
 <html lang="<?=$_SESSION['lang']?>">
@@ -12,20 +14,20 @@
             if (isset($_SESSION['cssPage'])) {
                 foreach ($_SESSION['cssPage'] as $cssScript) {
         ?>
-            <link rel="stylesheet" href="<?=$cssScript?>">
+            <link rel="stylesheet" href="<?=$url . $cssScript?>">
         <?php
                 }
             }
             if (isset($_SESSION['jsPage'])) {
                 foreach ($_SESSION['jsPage'] as $jsScript) {
         ?>
-            <script src="<?=$jsScript?>"></script>
+            <script src="<?=$url . $jsScript?>"></script>
         <?php
                 }
             }
             if (isset($_SESSION['pageIcon'])) {
         ?>
-            <link rel="icon" href="<?=$_SESSION['pageIcon']?>">
+            <link rel="icon" href="<?=$url . $_SESSION['pageIcon']?>">
         <?php
             }
         ?>
