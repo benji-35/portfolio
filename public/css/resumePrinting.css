@@ -1,0 +1,10 @@
+@media print {
+    header, .navBarWindows, .cvBaniereParent {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        display: block;
+    }
+}
